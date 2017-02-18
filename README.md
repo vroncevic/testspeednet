@@ -19,7 +19,7 @@ DEPENDENCIES
 
 This module requires these other modules and libraries:
 
-	py_util modules are build blocks for bash applications.
+	py_util modules are build blocks for python applications.
 
 COPYRIGHT AND LICENCE
 
