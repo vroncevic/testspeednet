@@ -2,8 +2,14 @@ name: speedtest py checker
 on:
   push:
     branches: [ master ]
+    paths:
+      - 'speedtest/**'
+      - 'setup.py'
   pull_request:
     branches: [ master ]
+    paths:
+      - 'speedtest/**'
+      - 'setup.py'
 jobs:
   build:
     runs-on: ubuntu-latest
