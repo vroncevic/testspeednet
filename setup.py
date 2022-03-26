@@ -113,9 +113,7 @@ setup(
     keywords='Unix, Linux, Development, speedtest',
     platforms='POSIX',
     classifiers=PYP_CLASSIFIERS,
-    packages=[
-        'speedtest', 'speedtest.pro', 'speedtest.pro.config'
-    ],
+    packages=['speedtest'],
     install_requires=['ats-utilities'],
     package_data={
         'speedtest': [
