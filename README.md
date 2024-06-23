@@ -10,7 +10,7 @@ The README is used to introduce the modules and provide instructions on
 how to install the modules, any machine dependencies it may have and any
 other information that should be provided before the modules are installed.
 
-[![testspeednet python checker](https://github.com/vroncevic/testspeednet/actions/workflows/armpicom_python_checker.yml/badge.svg)](https://github.com/vroncevic/testspeednet/actions/workflows/armpicom_python_checker.yml) [![testspeednet package checker](https://github.com/vroncevic/testspeednet/actions/workflows/armpicom_package_checker.yml/badge.svg)](https://github.com/vroncevic/testspeednet/actions/workflows/armpicom_package.yml) [![GitHub issues open](https://img.shields.io/github/issues/vroncevic/testspeednet.svg)](https://github.com/vroncevic/testspeednet/issues) [![GitHub contributors](https://img.shields.io/github/contributors/vroncevic/testspeednet.svg)](https://github.com/vroncevic/testspeednet/graphs/contributors)
+[![testspeednet python checker](https://github.com/vroncevic/testspeednet/actions/workflows/testspeednet_python_checker.yml/badge.svg)](https://github.com/vroncevic/testspeednet/actions/workflows/testspeednet_python_checker.yml) [![testspeednet package checker](https://github.com/vroncevic/testspeednet/actions/workflows/testspeednet_package_checker.yml/badge.svg)](https://github.com/vroncevic/testspeednet/actions/workflows/testspeednet_package.yml) [![GitHub issues open](https://img.shields.io/github/issues/vroncevic/testspeednet.svg)](https://github.com/vroncevic/testspeednet/issues) [![GitHub contributors](https://img.shields.io/github/contributors/vroncevic/testspeednet.svg)](https://github.com/vroncevic/testspeednet/graphs/contributors)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -35,7 +35,7 @@ Used next development environment
 
 ![debian linux os](https://raw.githubusercontent.com/vroncevic/testspeednet/dev/docs/debtux.png)
 
-[![testspeednet python3 build](https://github.com/vroncevic/testspeednet/actions/workflows/armpicom_python3_build.yml/badge.svg)](https://github.com/vroncevic/testspeednet/actions/workflows/armpicom_python3_build.yml)
+[![testspeednet python3 build](https://github.com/vroncevic/testspeednet/actions/workflows/testspeednet_python3_build.yml/badge.svg)](https://github.com/vroncevic/testspeednet/actions/workflows/testspeednet_python3_build.yml)
 
 Currently there are three ways to install package
 * Install process based on using pip mechanism
@@ -73,8 +73,8 @@ pip3 install -r requirements.txt
 python3 -m build --no-isolation --wheel
 pip3 install ./dist/testspeednet-*-py3-none-any.whl
 rm -f get-pip.py
-chmod 755 /usr/local/lib/python3.10/dist-packages/usr/local/bin/armpicom_run.py
-ln -s /usr/local/lib/python3.10/dist-packages/usr/local/bin/armpicom_run.py /usr/local/bin/armpicom_run.py
+chmod 755 /usr/local/lib/python3.10/dist-packages/usr/local/bin/testspeednet_run.py
+ln -s /usr/local/lib/python3.10/dist-packages/usr/local/bin/testspeednet_run.py /usr/local/bin/testspeednet_run.py
 ```
 
 ##### Install using py setup
