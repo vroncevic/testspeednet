@@ -1,0 +1,12 @@
+name: testspeednet_toc
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - '**.md'
+jobs:
+  generateTOC:
+    name: testspeednet_toc
+    runs-on: ubuntu-latest
+    steps:
+      - uses: technote-space/toc-generator@v4

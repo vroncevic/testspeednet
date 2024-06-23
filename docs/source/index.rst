@@ -1,9 +1,9 @@
-.. speedtest documentation master file, created by
+.. testspeednet documentation master file, created by
    sphinx-quickstart on Fri Jul  2 21:16:35 2021.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to speedtest's documentation!
+Welcome to testspeednet's documentation!
 =====================================
 
 .. toctree::
