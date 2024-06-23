@@ -1,6 +1,6 @@
 # Generate Memory Map Modules
 
-<img align="right" src="https://raw.githubusercontent.com/vroncevic/testspeednet/dev/docs/testspeednet_logo.png" width="25%">
+<img align="right" src="https://github.com/vroncevic/testspeednet/blob/master/docs/speedtest_logo.png" width="25%">
 
 **testspeednet** is tool for test speed net (download/upload).
 
