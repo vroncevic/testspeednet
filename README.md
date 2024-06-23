@@ -1,4 +1,4 @@
-# Generate Memory Map Modules
+# Test speed net (download/upload)
 
 <img align="right" src="https://github.com/vroncevic/testspeednet/blob/master/docs/speedtest_logo.png" width="25%">
 
