@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>testspeednet.net.utils.net_exceptions &#8212; testspeednet https://github.com/vroncevic/testspeednet/releases documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/classic.css?v=514cf933" />
+    
+    <script src="../../../../_static/documentation_options.js?v=8a831383"></script>
+    <script src="../../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">testspeednet https://github.com/vroncevic/testspeednet/releases documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../../testspeednet.html" >testspeednet</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../../net.html" accesskey="U">testspeednet.net</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">testspeednet.net.utils.net_exceptions</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for testspeednet.net.utils.net_exceptions</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;...&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="SpeedtestException">
+<a class="viewcode-back" href="../../../../testspeednet.net.utils.net_exceptions.html#testspeednet.net.utils.net_exceptions.SpeedtestException">[docs]</a>
+<span class="k">class</span> <span class="nc">SpeedtestException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base exception for this module&quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="SpeedtestCLIError">
+<a class="viewcode-back" href="../../../../testspeednet.net.utils.net_exceptions.html#testspeednet.net.utils.net_exceptions.SpeedtestCLIError">[docs]</a>
+<span class="k">class</span> <span class="nc">SpeedtestCLIError</span><span class="p">(</span><span class="n">SpeedtestException</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generic exception for raising errors during CLI operation&quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="SpeedtestHTTPError">
+<a class="viewcode-back" href="../../../../testspeednet.net.utils.net_exceptions.html#testspeednet.net.utils.net_exceptions.SpeedtestHTTPError">[docs]</a>
+<span class="k">class</span> <span class="nc">SpeedtestHTTPError</span><span class="p">(</span><span class="n">SpeedtestException</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base HTTP exception for this module&quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="SpeedtestConfigError">
+<a class="viewcode-back" href="../../../../testspeednet.net.utils.net_exceptions.html#testspeednet.net.utils.net_exceptions.SpeedtestConfigError">[docs]</a>
+<span class="k">class</span> <span class="nc">SpeedtestConfigError</span><span class="p">(</span><span class="n">SpeedtestException</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration XML is invalid&quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="SpeedtestServersError">
+<a class="viewcode-back" href="../../../../testspeednet.net.utils.net_exceptions.html#testspeednet.net.utils.net_exceptions.SpeedtestServersError">[docs]</a>
+<span class="k">class</span> <span class="nc">SpeedtestServersError</span><span class="p">(</span><span class="n">SpeedtestException</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Servers XML is invalid&quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="ConfigRetrievalError">
+<a class="viewcode-back" href="../../../../testspeednet.net.utils.net_exceptions.html#testspeednet.net.utils.net_exceptions.ConfigRetrievalError">[docs]</a>
+<span class="k">class</span> <span class="nc">ConfigRetrievalError</span><span class="p">(</span><span class="n">SpeedtestHTTPError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Could not retrieve config.php&quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="ServersRetrievalError">
+<a class="viewcode-back" href="../../../../testspeednet.net.utils.net_exceptions.html#testspeednet.net.utils.net_exceptions.ServersRetrievalError">[docs]</a>
+<span class="k">class</span> <span class="nc">ServersRetrievalError</span><span class="p">(</span><span class="n">SpeedtestHTTPError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Could not retrieve speedtest-servers.php&quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="InvalidServerIDType">
+<a class="viewcode-back" href="../../../../testspeednet.net.utils.net_exceptions.html#testspeednet.net.utils.net_exceptions.InvalidServerIDType">[docs]</a>
+<span class="k">class</span> <span class="nc">InvalidServerIDType</span><span class="p">(</span><span class="n">SpeedtestException</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Server ID used for filtering was not an integer&quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="NoMatchedServers">
+<a class="viewcode-back" href="../../../../testspeednet.net.utils.net_exceptions.html#testspeednet.net.utils.net_exceptions.NoMatchedServers">[docs]</a>
+<span class="k">class</span> <span class="nc">NoMatchedServers</span><span class="p">(</span><span class="n">SpeedtestException</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;No servers matched when filtering&quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="SpeedtestMiniConnectFailure">
+<a class="viewcode-back" href="../../../../testspeednet.net.utils.net_exceptions.html#testspeednet.net.utils.net_exceptions.SpeedtestMiniConnectFailure">[docs]</a>
+<span class="k">class</span> <span class="nc">SpeedtestMiniConnectFailure</span><span class="p">(</span><span class="n">SpeedtestException</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Could not connect to the provided speedtest mini server&quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="InvalidSpeedtestMiniServer">
+<a class="viewcode-back" href="../../../../testspeednet.net.utils.net_exceptions.html#testspeednet.net.utils.net_exceptions.InvalidSpeedtestMiniServer">[docs]</a>
+<span class="k">class</span> <span class="nc">InvalidSpeedtestMiniServer</span><span class="p">(</span><span class="n">SpeedtestException</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Server provided as a speedtest mini server does not actually appear</span>
+<span class="sd">    to be a speedtest mini server</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="ShareResultsConnectFailure">
+<a class="viewcode-back" href="../../../../testspeednet.net.utils.net_exceptions.html#testspeednet.net.utils.net_exceptions.ShareResultsConnectFailure">[docs]</a>
+<span class="k">class</span> <span class="nc">ShareResultsConnectFailure</span><span class="p">(</span><span class="n">SpeedtestException</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Could not connect to speedtest.net API to POST results&quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="ShareResultsSubmitFailure">
+<a class="viewcode-back" href="../../../../testspeednet.net.utils.net_exceptions.html#testspeednet.net.utils.net_exceptions.ShareResultsSubmitFailure">[docs]</a>
+<span class="k">class</span> <span class="nc">ShareResultsSubmitFailure</span><span class="p">(</span><span class="n">SpeedtestException</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Unable to successfully POST results to speedtest.net API after</span>
+<span class="sd">    connection</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="SpeedtestUploadTimeout">
+<a class="viewcode-back" href="../../../../testspeednet.net.utils.net_exceptions.html#testspeednet.net.utils.net_exceptions.SpeedtestUploadTimeout">[docs]</a>
+<span class="k">class</span> <span class="nc">SpeedtestUploadTimeout</span><span class="p">(</span><span class="n">SpeedtestException</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;testlength configuration reached during upload</span>
+<span class="sd">    Used to ensure the upload halts when no additional data should be sent</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="SpeedtestBestServerFailure">
+<a class="viewcode-back" href="../../../../testspeednet.net.utils.net_exceptions.html#testspeednet.net.utils.net_exceptions.SpeedtestBestServerFailure">[docs]</a>
+<span class="k">class</span> <span class="nc">SpeedtestBestServerFailure</span><span class="p">(</span><span class="n">SpeedtestException</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Unable to determine best server&quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="SpeedtestMissingBestServer">
+<a class="viewcode-back" href="../../../../testspeednet.net.utils.net_exceptions.html#testspeednet.net.utils.net_exceptions.SpeedtestMissingBestServer">[docs]</a>
+<span class="k">class</span> <span class="nc">SpeedtestMissingBestServer</span><span class="p">(</span><span class="n">SpeedtestException</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;get_best_server not called or not able to determine best server&quot;&quot;&quot;</span></div>
+
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">testspeednet https://github.com/vroncevic/testspeednet/releases documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../../testspeednet.html" >testspeednet</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../../net.html" >testspeednet.net</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">testspeednet.net.utils.net_exceptions</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2024, Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    </div>
+  </body>
+</html>

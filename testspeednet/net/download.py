@@ -25,6 +25,8 @@ from typing import Any, Dict, List
 
 try:
     from ats_utilities.console_io.verbose import verbose_message
+    from ats_utilities.console_io.success import success_message
+    from testspeednet.net.test import TestNet
 except ImportError as ats_error_message:
     # Force close python ATS ##################################################
     sys.exit(f'\n{__file__}\n{ats_error_message}\n')
@@ -71,6 +73,7 @@ class Download:
             verbose, [f'{self._TOOL_VERBOSE.lower()} init download command']
         )
         self.config: Dict[Any, Any] = config
+        self.st: TestNet = TestNet(secure=True)
 
     def execute(self, verbose: bool = False) -> bool:
         '''
@@ -85,9 +88,14 @@ class Download:
         verbose_message(
             verbose, [f'{self._TOOL_VERBOSE.lower()} performs download check']
         )
+        speed: Dict[str, float] = self._download()
+        download: float = speed['download']
+        success_message([
+            f'{self._TOOL_VERBOSE.lower()} Download: {download} Mbs'
+        ])
         return True
 
-    def _download(self) -> List[Any]:
+    def _download(self) -> Dict[str, float]:
         '''
             Download command operation.
 
@@ -97,5 +105,4 @@ class Download:
             :rtype: List[Any]
             :exceptions: None
         '''
-        download_info: List[Any] = []
-        return download_info
+        return {'download': self.st.download() / 1000000}

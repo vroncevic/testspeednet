@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>testspeednet.net.utils.http_uploader_data &#8212; testspeednet https://github.com/vroncevic/testspeednet/releases documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/classic.css?v=514cf933" />
+    
+    <script src="../../../../_static/documentation_options.js?v=8a831383"></script>
+    <script src="../../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">testspeednet https://github.com/vroncevic/testspeednet/releases documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../../testspeednet.html" >testspeednet</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../../net.html" accesskey="U">testspeednet.net</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">testspeednet.net.utils.http_uploader_data</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for testspeednet.net.utils.http_uploader_data</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: UTF-8 -*-</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Module</span>
+<span class="sd">    http_uploader_data.py</span>
+<span class="sd">Copyright</span>
+<span class="sd">    Copyright (C) 2016 - 2024 Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;</span>
+<span class="sd">    testspeednet is free software: you can redistribute it and/or modify</span>
+<span class="sd">    it under the terms of the GNU General Public License as published by the</span>
+<span class="sd">    Free Software Foundation, either version 3 of the License, or</span>
+<span class="sd">    (at your option) any later version.</span>
+<span class="sd">    testspeednet is distributed in the hope that it will be useful, but</span>
+<span class="sd">    WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="sd">    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</span>
+<span class="sd">    See the GNU General Public License for more details.</span>
+<span class="sd">    You should have received a copy of the GNU General Public License along</span>
+<span class="sd">    with this program. If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="sd">Info</span>
+<span class="sd">    Defines class HTTPUploaderData with attribute(s) and method(s).</span>
+<span class="sd">    Manage the data to be uploaded in an HTTP upload operation, including</span>
+<span class="sd">    handling data pre-allocation and reading chunks of data for the upload.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="kn">import</span> <span class="nn">timeit</span>
+<span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Event</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span><span class="p">,</span> <span class="n">BytesIO</span>
+<span class="kn">from</span> <span class="nn">testspeednet.net.utils.fake_shutdown_event</span> <span class="kn">import</span> <span class="n">FakeShutdownEvent</span>
+<span class="kn">from</span> <span class="nn">testspeednet.net.utils.net_exceptions</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">SpeedtestUploadTimeout</span><span class="p">,</span> <span class="n">SpeedtestCLIError</span>
+<span class="p">)</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Vladimir Roncevic&#39;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s1">&#39;(C) 2024, https://vroncevic.github.io/testspeednet&#39;</span>
+<span class="n">__credits__</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Vladimir Roncevic&#39;</span><span class="p">,</span> <span class="s1">&#39;Python Software Foundation&#39;</span><span class="p">]</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s1">&#39;https://github.com/vroncevic/testspeednet/blob/dev/LICENSE&#39;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;1.0.0&#39;</span>
+<span class="n">__maintainer__</span> <span class="o">=</span> <span class="s1">&#39;Vladimir Roncevic&#39;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s1">&#39;elektron.ronca@gmail.com&#39;</span>
+<span class="n">__status__</span> <span class="o">=</span> <span class="s1">&#39;Updated&#39;</span>
+
+
+<div class="viewcode-block" id="HTTPUploaderData">
+<a class="viewcode-back" href="../../../../testspeednet.net.utils.http_uploader_data.html#testspeednet.net.utils.http_uploader_data.HTTPUploaderData">[docs]</a>
+<span class="k">class</span> <span class="nc">HTTPUploaderData</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Defines class HTTPUploaderData with attribute(s) and method(s).</span>
+<span class="sd">        Manage the data to be uploaded in an HTTP upload operation, including</span>
+<span class="sd">        handling data pre-allocation and reading chunks of data for the upload.</span>
+
+<span class="sd">        It defines:</span>
+
+<span class="sd">            :attributes:</span>
+<span class="sd">                | _TOOL_VERBOSE - Console text indicator for process-phase.</span>
+<span class="sd">                | length - Length of the data to upload.</span>
+<span class="sd">                | start - Start time of the upload operation.</span>
+<span class="sd">                | timeout - Maximum allowed time for the download operation.</span>
+<span class="sd">                | _shutdown_event - Shutdown event.</span>
+<span class="sd">                | _data - Pre-allocated upload data buffer.</span>
+<span class="sd">                | total - List tracking the sizes of uploaded chunks.</span>
+<span class="sd">            :methods:</span>
+<span class="sd">                | __init__ - Initializes an instance of HTTPUploaderData.</span>
+<span class="sd">                | pre_allocate - Pre-allocates the data buffer for upload.</span>
+<span class="sd">                | data - Property to get the pre-allocated data buffer.</span>
+<span class="sd">                | read - Reads a chunk of data from the pre-allocated buffer.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="n">_TOOL_VERBOSE</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;TEST_SPEED_NET::NET::UTILS::HTTP_UPLOADER_DATA&#39;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">length</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">start</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">shutdown_event</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Event</span> <span class="o">|</span> <span class="n">FakeShutdownEvent</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Initializes an instance of HTTPUploaderData.</span>
+
+<span class="sd">            :param length: Length of the data to upload</span>
+<span class="sd">            :type length: &lt;int&gt;</span>
+<span class="sd">            :param start: Start time of the download operation</span>
+<span class="sd">            :type start: &lt;int&gt;</span>
+<span class="sd">            :param timeout: Maximum allowed time for the download operation</span>
+<span class="sd">            :type timeout: &lt;int&gt;</span>
+<span class="sd">            :param shutdown_event: Shutdown event</span>
+<span class="sd">            :type shutdown_event: &lt;Optional[Event | FakeShutdownEvent]&gt;</span>
+<span class="sd">            :exceptions: None</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">length</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">start</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">timeout</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_shutdown_event</span><span class="p">:</span> <span class="n">Event</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">FakeShutdownEvent</span>
+        <span class="k">if</span> <span class="n">shutdown_event</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_shutdown_event</span> <span class="o">=</span> <span class="n">shutdown_event</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_shutdown_event</span> <span class="o">=</span> <span class="n">FakeShutdownEvent</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">:</span> <span class="n">BytesIO</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">total</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<div class="viewcode-block" id="HTTPUploaderData.pre_allocate">
+<a class="viewcode-back" href="../../../../testspeednet.net.utils.http_uploader_data.html#testspeednet.net.utils.http_uploader_data.HTTPUploaderData.pre_allocate">[docs]</a>
+    <span class="k">def</span> <span class="nf">pre_allocate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Pre-allocates the data buffer for upload.</span>
+
+<span class="sd">            :exceptions: None</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">chars</span> <span class="o">=</span> <span class="s1">&#39;0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ&#39;</span>
+        <span class="n">multiplier</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="p">)</span> <span class="o">/</span> <span class="mf">36.0</span><span class="p">))</span>
+        <span class="n">IO</span> <span class="o">=</span> <span class="n">BytesIO</span> <span class="ow">or</span> <span class="n">StringIO</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">IO</span><span class="p">((</span>
+                <span class="sa">f</span><span class="s1">&#39;content1=</span><span class="si">{</span><span class="p">(</span><span class="n">chars</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">multiplier</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">9</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+        <span class="k">except</span> <span class="ne">MemoryError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">SpeedtestCLIError</span><span class="p">(</span>
+                <span class="s1">&#39;Insufficient memory to pre-allocate upload data.&#39;</span>
+                <span class="s1">&#39;Please use --no-pre-allocate&#39;</span>
+            <span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span></div>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">BytesIO</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Property to get the pre-allocated data buffer.</span>
+
+<span class="sd">            :return: The pre-allocated data buffer</span>
+<span class="sd">            :rtype: &lt;Optional[BytesIO]&gt;</span>
+<span class="sd">            :exceptions: None</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pre_allocate</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span>
+
+<div class="viewcode-block" id="HTTPUploaderData.read">
+<a class="viewcode-back" href="../../../../testspeednet.net.utils.http_uploader_data.html#testspeednet.net.utils.http_uploader_data.HTTPUploaderData.read">[docs]</a>
+    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10240</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Reads a chunk of data from the pre-allocated buffer.</span>
+
+<span class="sd">            Reads up to `n` bytes of data from the pre-allocated buffer,</span>
+<span class="sd">            appending the size of the read chunk to `self.total`. Raises</span>
+<span class="sd">            `SpeedtestUploadTimeout` if the operation exceeds the allowed</span>
+<span class="sd">            timeout or if the shutdown event is set.</span>
+
+<span class="sd">            :param n: Number of bytes to read from the buffer</span>
+<span class="sd">            :type n: &lt;int&gt;</span>
+<span class="sd">            :return: A chunk of data from the pre-allocated buffer</span>
+<span class="sd">            :rtype: &lt;bytes&gt;</span>
+<span class="sd">            :exceptions: None</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;data is None&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_shutdown_event</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;shutdown_event is None&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">((</span><span class="n">timeit</span><span class="o">.</span><span class="n">default_timer</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span> <span class="ow">and</span>
+                <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_shutdown_event</span><span class="o">.</span><span class="n">is_set</span><span class="p">()):</span>
+            <span class="n">chunk</span><span class="p">:</span> <span class="nb">bytes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">total</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">chunk</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">chunk</span>
+        <span class="k">raise</span> <span class="n">SpeedtestUploadTimeout</span><span class="p">()</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Returns the length of the data to upload.</span>
+
+<span class="sd">            :return: The length of the data</span>
+<span class="sd">            :rtype: &lt;int&gt;</span>
+<span class="sd">            :exceptions: None</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span></div>
+
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">testspeednet https://github.com/vroncevic/testspeednet/releases documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../../testspeednet.html" >testspeednet</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../../net.html" >testspeednet.net</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">testspeednet.net.utils.http_uploader_data</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2024, Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    </div>
+  </body>
+</html>

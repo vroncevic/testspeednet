@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>testspeednet.net.utils.test_results &#8212; testspeednet https://github.com/vroncevic/testspeednet/releases documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/classic.css?v=514cf933" />
+    
+    <script src="../../../../_static/documentation_options.js?v=8a831383"></script>
+    <script src="../../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">testspeednet https://github.com/vroncevic/testspeednet/releases documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../../testspeednet.html" >testspeednet</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../../net.html" accesskey="U">testspeednet.net</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">testspeednet.net.utils.test_results</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for testspeednet.net.utils.test_results</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: UTF-8 -*-</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Module</span>
+<span class="sd">    test_results.py</span>
+<span class="sd">Copyright</span>
+<span class="sd">    Copyright (C) 2016 - 2024 Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;</span>
+<span class="sd">    testspeednet is free software: you can redistribute it and/or modify</span>
+<span class="sd">    it under the terms of the GNU General Public License as published by the</span>
+<span class="sd">    Free Software Foundation, either version 3 of the License, or</span>
+<span class="sd">    (at your option) any later version.</span>
+<span class="sd">    testspeednet is distributed in the hope that it will be useful, but</span>
+<span class="sd">    WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="sd">    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</span>
+<span class="sd">    See the GNU General Public License for more details.</span>
+<span class="sd">    You should have received a copy of the GNU General Public License along</span>
+<span class="sd">    with this program. If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="sd">Info</span>
+<span class="sd">    Defines class TestResults with attribute(s) and method(s).</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">UTC</span>
+<span class="kn">from</span> <span class="nn">json</span> <span class="kn">import</span> <span class="n">dumps</span>
+<span class="kn">from</span> <span class="nn">hashlib</span> <span class="kn">import</span> <span class="n">md5</span>
+<span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">parse_qs</span>
+<span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">OpenerDirector</span><span class="p">,</span> <span class="n">Request</span>
+<span class="kn">from</span> <span class="nn">http.client</span> <span class="kn">import</span> <span class="n">HTTPResponse</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">testspeednet.net.utils.net_exceptions</span> <span class="kn">import</span> <span class="p">(</span>
+        <span class="n">ShareResultsSubmitFailure</span><span class="p">,</span> <span class="n">ShareResultsConnectFailure</span>
+    <span class="p">)</span>
+    <span class="kn">from</span> <span class="nn">testspeednet.net.utils.opener</span> <span class="kn">import</span> <span class="n">Opener</span>
+    <span class="kn">from</span> <span class="nn">testspeednet.net.utils.catch_request</span> <span class="kn">import</span> <span class="n">CatchRequest</span>
+    <span class="kn">from</span> <span class="nn">testspeednet.net.utils.requester</span> <span class="kn">import</span> <span class="n">Requester</span>
+<span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">ats_error_message</span><span class="p">:</span>
+    <span class="c1"># Force close python ATS ##################################################</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="si">{</span><span class="vm">__file__</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">ats_error_message</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Vladimir Roncevic&#39;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s1">&#39;(C) 2024, https://vroncevic.github.io/testspeednet&#39;</span>
+<span class="n">__credits__</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Vladimir Roncevic&#39;</span><span class="p">,</span> <span class="s1">&#39;Python Software Foundation&#39;</span><span class="p">]</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s1">&#39;https://github.com/vroncevic/testspeednet/blob/dev/LICENSE&#39;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;1.0.0&#39;</span>
+<span class="n">__maintainer__</span> <span class="o">=</span> <span class="s1">&#39;Vladimir Roncevic&#39;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s1">&#39;elektron.ronca@gmail.com&#39;</span>
+<span class="n">__status__</span> <span class="o">=</span> <span class="s1">&#39;Updated&#39;</span>
+
+
+<div class="viewcode-block" id="TestResults">
+<a class="viewcode-back" href="../../../../testspeednet.net.utils.test_results.html#testspeednet.net.utils.test_results.TestResults">[docs]</a>
+<span class="k">class</span> <span class="nc">TestResults</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Defines class TestResults with attribute(s) and method(s).</span>
+
+<span class="sd">        It defines:</span>
+
+<span class="sd">            :attributes:</span>
+<span class="sd">                | _TOOL_VERBOSE - Console text indicator for process-phase.</span>
+<span class="sd">                | download - Amount of data downloaded in bytes.</span>
+<span class="sd">                | upload - Amount of data uploaded in bytes.</span>
+<span class="sd">                | ping - Ping latency in milliseconds.</span>
+<span class="sd">                | server - Details about the server used for testing.</span>
+<span class="sd">                | client - Details about the client&#39;s environment.</span>
+<span class="sd">                | _share - URL to share results if available.</span>
+<span class="sd">                | timestamp - Timestamp of when the test was conducted.</span>
+<span class="sd">                | bytes_received - Total bytes received during the test.</span>
+<span class="sd">                | bytes_sent - Total bytes sent during the test.</span>
+<span class="sd">                | _opener - HTTP opener used for requests.</span>
+<span class="sd">                | _secure - Indicates if the connection is secure.</span>
+<span class="sd">            :methods:</span>
+<span class="sd">                | __init__ - Initializes an instance of TestResults.</span>
+<span class="sd">                | share - Submits test results to speedtest.net and</span>
+<span class="sd">                |         returns the shareable URL of the test result image.</span>
+<span class="sd">                | dict - Representation of TestResults attributes.</span>
+<span class="sd">                | json - JSON string representation of TestResults attributes.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="n">_TOOL_VERBOSE</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;TEST_SPEED_NET::NET::UTILS::TEST_RESULTS&#39;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">download</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">upload</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">ping</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">server</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">client</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">opener</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">OpenerDirector</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">secure</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Initializes an instance of TestResults.</span>
+
+<span class="sd">            :param download: Amount of data downloaded in bytes</span>
+<span class="sd">            :type download: &lt;int&gt;</span>
+<span class="sd">            :param upload: Amount of data uploaded in bytes</span>
+<span class="sd">            :type upload: &lt;int&gt;</span>
+<span class="sd">            :param ping: Ping latency in milliseconds</span>
+<span class="sd">            :type ping: &lt;int&gt;</span>
+<span class="sd">            :param server: Details about the server used for testing</span>
+<span class="sd">            :type server: &lt;Optional[Dict[str, Any]]&gt;</span>
+<span class="sd">            :param client: Details about the client&#39;s environment</span>
+<span class="sd">            :type client: &lt;Optional[Dict[str, Any]]&gt;</span>
+<span class="sd">            :param opener: HTTP opener used for requests</span>
+<span class="sd">            :type opener: &lt;Optional[OpenerDirector]&gt;</span>
+<span class="sd">            :param secure: Indicates if the connection is secure</span>
+<span class="sd">            :type secure: &lt;bool&gt;</span>
+<span class="sd">            :exceptions: None</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">download</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">download</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">upload</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">upload</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ping</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">ping</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">server</span> <span class="ow">or</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">client</span> <span class="ow">or</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_share</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">now_date</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">UTC</span><span class="p">)</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">now_date</span><span class="si">}</span><span class="s1">Z&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bytes_received</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bytes_sent</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_opener</span><span class="p">:</span> <span class="n">OpenerDirector</span>
+        <span class="k">if</span> <span class="n">opener</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_opener</span> <span class="o">=</span> <span class="n">opener</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_opener</span> <span class="o">=</span> <span class="n">Opener</span><span class="o">.</span><span class="n">build_opener</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_secure</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">secure</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Returns a string representation of the TestResults instance.</span>
+
+<span class="sd">            :return:</span>
+<span class="sd">            :rtype: &lt;str&gt;</span>
+<span class="sd">            :exceptions: None</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dict</span><span class="p">())</span>
+
+<div class="viewcode-block" id="TestResults.share">
+<a class="viewcode-back" href="../../../../testspeednet.net.utils.test_results.html#testspeednet.net.utils.test_results.TestResults.share">[docs]</a>
+    <span class="k">def</span> <span class="nf">share</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Submits test results to speedtest.net and returns the shareable URL</span>
+<span class="sd">            of the test result image.</span>
+
+<span class="sd">            :return: String representation of TestResults</span>
+<span class="sd">            :rtype: &lt;Optional[str]&gt;</span>
+<span class="sd">            :exceptions: None</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_share</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_share</span>
+        <span class="n">download</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">download</span> <span class="o">/</span> <span class="mf">1000.0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+        <span class="n">ping</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ping</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+        <span class="n">upload</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">upload</span> <span class="o">/</span> <span class="mf">1000.0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+        <span class="n">api_hash</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">md5</span><span class="p">(</span>
+            <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">ping</span><span class="si">}</span><span class="s1">-</span><span class="si">{</span><span class="n">upload</span><span class="si">}</span><span class="s1">-</span><span class="si">{</span><span class="n">download</span><span class="si">}</span><span class="s1">-297aae72&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+        <span class="n">api_data</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="sa">f</span><span class="s1">&#39;recommendedserverid=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;ping=</span><span class="si">{</span><span class="n">ping</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;screenresolution=&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;promo=&#39;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;download=</span><span class="si">{</span><span class="n">download</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;screendpi=&#39;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;upload=</span><span class="si">{</span><span class="n">upload</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;testmethod=http&#39;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;hash=_</span><span class="si">{</span><span class="n">api_hash</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;touchscreen=none&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;startmode=pingselect&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;accuracy=1&#39;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;bytesreceived=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">bytes_received</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;bytessent=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">bytes_sent</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;serverid=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="p">]</span>
+        <span class="n">headers</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;Referer&#39;</span><span class="p">:</span> <span class="s1">&#39;http://c.speedtest.net/flash/speedtest.swf&#39;</span>
+        <span class="p">}</span>
+        <span class="n">request</span><span class="p">:</span> <span class="n">Request</span> <span class="o">=</span> <span class="n">Requester</span><span class="o">.</span><span class="n">build_request</span><span class="p">(</span>
+            <span class="n">url</span><span class="o">=</span><span class="s1">&#39;://www.speedtest.net/api/api.php&#39;</span><span class="p">,</span>
+            <span class="n">data</span><span class="o">=</span><span class="s1">&#39;&amp;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">api_data</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(),</span>
+            <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
+            <span class="n">secure</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_secure</span>
+        <span class="p">)</span>
+        <span class="n">res</span><span class="p">:</span> <span class="n">HTTPResponse</span> <span class="o">|</span> <span class="kc">None</span>
+        <span class="n">e</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="ne">BaseException</span> <span class="o">|</span> <span class="kc">None</span>
+        <span class="n">res</span><span class="p">,</span> <span class="n">e</span> <span class="o">=</span> <span class="n">CatchRequest</span><span class="o">.</span><span class="n">catch_request</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">opener</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_opener</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ShareResultsConnectFailure</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">bool</span><span class="p">(</span><span class="n">res</span><span class="p">):</span>
+            <span class="n">response</span><span class="p">:</span> <span class="nb">bytes</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+            <span class="n">res_code</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">getcode</span><span class="p">()</span>
+            <span class="n">res</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">res_code</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">ShareResultsSubmitFailure</span><span class="p">(</span>
+                    <span class="s1">&#39;Could not submit results to speedtest.net&#39;</span>
+                <span class="p">)</span>
+            <span class="n">qsargs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="n">parse_qs</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
+            <span class="n">resultid</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">qsargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;resultid&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">resultid</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">resultid</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">ShareResultsSubmitFailure</span><span class="p">(</span>
+                    <span class="s1">&#39;Could not submit results to speedtest.net&#39;</span>
+                <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_share</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;http://www.speedtest.net/result/</span><span class="si">{</span><span class="n">resultid</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">.png&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_share</span></div>
+
+
+<div class="viewcode-block" id="TestResults.dict">
+<a class="viewcode-back" href="../../../../testspeednet.net.utils.test_results.html#testspeednet.net.utils.test_results.TestResults.dict">[docs]</a>
+    <span class="k">def</span> <span class="nf">dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Returns a dictionary representation of TestResults attributes.</span>
+
+<span class="sd">            :return: Dictionary containing TestResults attributes</span>
+<span class="sd">            :rtype: &lt;Dict[str, Any]&gt;</span>
+<span class="sd">            :exceptions: None</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;download&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">download</span><span class="p">,</span>
+            <span class="s1">&#39;upload&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">upload</span><span class="p">,</span>
+            <span class="s1">&#39;ping&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">ping</span><span class="p">,</span>
+            <span class="s1">&#39;server&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="p">,</span>
+            <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span><span class="p">,</span>
+            <span class="s1">&#39;bytes_sent&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">bytes_sent</span><span class="p">,</span>
+            <span class="s1">&#39;bytes_received&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">bytes_received</span><span class="p">,</span>
+            <span class="s1">&#39;share&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_share</span><span class="p">,</span>
+            <span class="s1">&#39;client&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="p">,</span>
+        <span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="TestResults.json">
+<a class="viewcode-back" href="../../../../testspeednet.net.utils.test_results.html#testspeednet.net.utils.test_results.TestResults.json">[docs]</a>
+    <span class="k">def</span> <span class="nf">json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pretty</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Returns a JSON string representation of TestResults attributes.</span>
+
+<span class="sd">            :param pretty: Whether to format JSON string prettily</span>
+<span class="sd">            :type pretty: &lt;bool&gt;</span>
+<span class="sd">            :return: JSON string representation of TestResults attributes</span>
+<span class="sd">            :rtype: &lt;str&gt;</span>
+<span class="sd">            :exceptions: None</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">kwargs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="n">pretty</span><span class="p">:</span>
+            <span class="n">kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;indent&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;sort_keys&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
+        <span class="k">return</span> <span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dict</span><span class="p">(),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">testspeednet https://github.com/vroncevic/testspeednet/releases documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../../testspeednet.html" >testspeednet</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../../net.html" >testspeednet.net</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">testspeednet.net.utils.test_results</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2024, Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    </div>
+  </body>
+</html>
