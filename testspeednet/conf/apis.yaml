@@ -1,6 +1,12 @@
 server:
   https://www.speedtest.net/api/js/servers?engine=js&search=
 
+url_check_servers:
+  - ://www.speedtest.net/speedtest-servers-static.php
+  - http://c.speedtest.net/speedtest-servers-static.php
+  - ://www.speedtest.net/speedtest-servers.php
+  - http://c.speedtest.net/speedtest-servers.php
+
 countries:
   - Afghanistan
   - Åland Islands

@@ -52,6 +52,7 @@ class SpeedTestServer(Base):
 
             :attributes:
                 | __tablename__ - Table name: speedtest_servers.
+                | id - Integer primary key.
                 | server_id - A unique identifier for the server.
                 | url - The URL for the speed test server.
                 | lat - The latitude coordinate of the server.
@@ -69,7 +70,7 @@ class SpeedTestServer(Base):
 
     __tablename__: str = 'speedtest_servers'
 
-    id = Column(Integer, primary_key=True)
+    id: Column[int] = Column(Integer, primary_key=True)
     server_id: Column[str] = Column(String, nullable=False)
     url: Column[str] = Column(String, nullable=False)
     lat: Column[float] = Column(Float, nullable=False)
