@@ -35,7 +35,7 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = '(C) 2024, https://vroncevic.github.io/testspeednet'
 __credits__: List[str] = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/testspeednet/blob/dev/LICENSE'
-__version__ = '1.0.0'
+__version__ = '1.0.1'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -57,7 +57,7 @@ class Speed:
                 | _speed - Speed command operation.
     '''
 
-    _TOOL_VERBOSE: str = 'TEST_SPEED_NET::NET::FETCH_CONFIG'
+    _TOOL_VERBOSE: str = 'TEST_SPEED_NET::NET::SPEED'
 
     def __init__(self, config: Dict[Any, Any], verbose: bool = False) -> None:
         '''
@@ -105,8 +105,8 @@ class Speed:
 
             :param verbose: Enable/Disable verbose option
             :type verbose: <bool>
-            :return: List of informations
-            :rtype: List[Any]
+            :return: Dict with informations
+            :rtype: <Dict[str, float]>
             :exceptions: None
         '''
         return {
