@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>testspeednet.net.utils.checking_servers module &#8212; testspeednet https://github.com/vroncevic/testspeednet/releases documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css?v=514cf933" />
+    
+    <script src="_static/documentation_options.js?v=8a831383"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="testspeednet.net.utils.connector module" href="testspeednet.net.utils.connector.html" />
+    <link rel="prev" title="testspeednet.net.utils.catch_request module" href="testspeednet.net.utils.catch_request.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="testspeednet.net.utils.connector.html" title="testspeednet.net.utils.connector module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="testspeednet.net.utils.catch_request.html" title="testspeednet.net.utils.catch_request module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">testspeednet https://github.com/vroncevic/testspeednet/releases documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >testspeednet</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="testspeednet.html" >testspeednet package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="testspeednet.net.html" >testspeednet.net package</a> &#187;</li>
+          <li class="nav-item nav-item-4"><a href="testspeednet.net.utils.html" accesskey="U">testspeednet.net.utils package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">testspeednet.net.utils.checking_servers module</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-testspeednet.net.utils.checking_servers">
+<span id="testspeednet-net-utils-checking-servers-module"></span><h1>testspeednet.net.utils.checking_servers module<a class="headerlink" href="#module-testspeednet.net.utils.checking_servers" title="Link to this heading">¶</a></h1>
+<dl class="simple">
+<dt>Module</dt><dd><p>checking_servers.py</p>
+</dd>
+<dt>Copyright</dt><dd><p>Copyright (C) 2016 - 2024 Vladimir Roncevic &lt;<a class="reference external" href="mailto:elektron&#46;ronca&#37;&#52;&#48;gmail&#46;com">elektron<span>&#46;</span>ronca<span>&#64;</span>gmail<span>&#46;</span>com</a>&gt;
+testspeednet is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by the
+Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+testspeednet is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+See the GNU General Public License for more details.
+You should have received a copy of the GNU General Public License along
+with this program. If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+</dd>
+<dt>Info</dt><dd><p>Defines class NeighbourServer with attribute(s) and method(s).</p>
+</dd>
+</dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="testspeednet.net.utils.checking_servers.NeighbourServer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testspeednet.net.utils.checking_servers.</span></span><span class="sig-name descname"><span class="pre">NeighbourServer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">secure</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opener</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">OpenerDirector</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/testspeednet/net/utils/checking_servers.html#NeighbourServer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testspeednet.net.utils.checking_servers.NeighbourServer" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Defines class NeighbourServer with attribute(s) and method(s).</p>
+<p>It defines:</p>
+<blockquote>
+<div><dl class="field-list">
+<dt class="field-odd">attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><div class="line-block">
+<div class="line">_TOOL_VERBOSE - Console text indicator for process-phase.</div>
+</div>
+</dd>
+<dt class="field-even">methods<span class="colon">:</span></dt>
+<dd class="field-even"><div class="line-block">
+<div class="line">__init__ - Initializes an instance of NeighbourServer.</div>
+<div class="line">get_servers - Retrieves a dictionary of servers</div>
+<div class="line-block">
+<div class="line">from speedtest.net.</div>
+</div>
+<div class="line">get_best_server - Finds and returns the best server</div>
+<div class="line-block">
+<div class="line">based on latency.</div>
+</div>
+</div>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="testspeednet.net.utils.checking_servers.NeighbourServer._TOOL_VERBOSE">
+<span class="sig-name descname"><span class="pre">_TOOL_VERBOSE</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'TEST_SPEED_NET::NET::UTILS::NEIGHBOUR_SERVER'</span></em><a class="headerlink" href="#testspeednet.net.utils.checking_servers.NeighbourServer._TOOL_VERBOSE" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="testspeednet.net.utils.checking_servers.NeighbourServer.get_best_server">
+<span class="sig-name descname"><span class="pre">get_best_server</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/testspeednet/net/utils/checking_servers.html#NeighbourServer.get_best_server"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testspeednet.net.utils.checking_servers.NeighbourServer.get_best_server" title="Link to this definition">¶</a></dt>
+<dd><p>Finds and returns the best server based on latency.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>limit</strong> (<em>&lt;int&gt;</em>) – Maximum number of servers to consider.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Best server dictionary</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>&lt;Optional[Dict[str, Any]]&gt;</p>
+</dd>
+<dt class="field-even">Exceptions<span class="colon">:</span></dt>
+<dd class="field-even"><p>SpeedtestBestServerFailure</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="testspeednet.net.utils.checking_servers.NeighbourServer.get_servers">
+<span class="sig-name descname"><span class="pre">get_servers</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/testspeednet/net/utils/checking_servers.html#NeighbourServer.get_servers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testspeednet.net.utils.checking_servers.NeighbourServer.get_servers" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves a dictionary of servers from speedtest.net.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dictionary of servers</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>&lt;Optional[Dict[Any, Any]]&gt;</p>
+</dd>
+<dt class="field-odd">Exceptions<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ServersRetrievalError</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="testspeednet.net.utils.checking_servers.etree_iter">
+<span class="sig-prename descclassname"><span class="pre">testspeednet.net.utils.checking_servers.</span></span><span class="sig-name descname"><span class="pre">etree_iter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#testspeednet.net.utils.checking_servers.etree_iter" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">testspeednet.net.utils.checking_servers module</a><ul>
+<li><a class="reference internal" href="#testspeednet.net.utils.checking_servers.NeighbourServer"><code class="docutils literal notranslate"><span class="pre">NeighbourServer</span></code></a><ul>
+<li><a class="reference internal" href="#testspeednet.net.utils.checking_servers.NeighbourServer._TOOL_VERBOSE"><code class="docutils literal notranslate"><span class="pre">NeighbourServer._TOOL_VERBOSE</span></code></a></li>
+<li><a class="reference internal" href="#testspeednet.net.utils.checking_servers.NeighbourServer.get_best_server"><code class="docutils literal notranslate"><span class="pre">NeighbourServer.get_best_server()</span></code></a></li>
+<li><a class="reference internal" href="#testspeednet.net.utils.checking_servers.NeighbourServer.get_servers"><code class="docutils literal notranslate"><span class="pre">NeighbourServer.get_servers()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#testspeednet.net.utils.checking_servers.etree_iter"><code class="docutils literal notranslate"><span class="pre">etree_iter()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="testspeednet.net.utils.catch_request.html"
+                          title="previous chapter">testspeednet.net.utils.catch_request module</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="testspeednet.net.utils.connector.html"
+                          title="next chapter">testspeednet.net.utils.connector module</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/testspeednet.net.utils.checking_servers.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="testspeednet.net.utils.connector.html" title="testspeednet.net.utils.connector module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="testspeednet.net.utils.catch_request.html" title="testspeednet.net.utils.catch_request module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">testspeednet https://github.com/vroncevic/testspeednet/releases documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >testspeednet</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="testspeednet.html" >testspeednet package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="testspeednet.net.html" >testspeednet.net package</a> &#187;</li>
+          <li class="nav-item nav-item-4"><a href="testspeednet.net.utils.html" >testspeednet.net.utils package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">testspeednet.net.utils.checking_servers module</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2024, Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    </div>
+  </body>
+</html>

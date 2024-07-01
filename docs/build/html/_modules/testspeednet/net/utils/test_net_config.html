@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>testspeednet.net.utils.test_net_config &#8212; testspeednet https://github.com/vroncevic/testspeednet/releases documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/classic.css?v=514cf933" />
+    
+    <script src="../../../../_static/documentation_options.js?v=8a831383"></script>
+    <script src="../../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">testspeednet https://github.com/vroncevic/testspeednet/releases documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../../testspeednet.html" >testspeednet</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../../net.html" accesskey="U">testspeednet.net</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">testspeednet.net.utils.test_net_config</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for testspeednet.net.utils.test_net_config</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: UTF-8 -*-</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Module</span>
+<span class="sd">    test_net_config.py</span>
+<span class="sd">Copyright</span>
+<span class="sd">    Copyright (C) 2016 - 2024 Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;</span>
+<span class="sd">    testspeednet is free software: you can redistribute it and/or modify</span>
+<span class="sd">    it under the terms of the GNU General Public License as published by the</span>
+<span class="sd">    Free Software Foundation, either version 3 of the License, or</span>
+<span class="sd">    (at your option) any later version.</span>
+<span class="sd">    testspeednet is distributed in the hope that it will be useful, but</span>
+<span class="sd">    WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="sd">    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</span>
+<span class="sd">    See the GNU General Public License for more details.</span>
+<span class="sd">    You should have received a copy of the GNU General Public License along</span>
+<span class="sd">    with this program. If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="sd">Info</span>
+<span class="sd">    Defines class TestNetConfig with attribute(s) and method(s).</span>
+<span class="sd">    Provides methods to retrieve network configuration details</span>
+<span class="sd">    from speedtest.net.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">as</span> <span class="nn">ET</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">ceil</span>
+<span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">OpenerDirector</span><span class="p">,</span> <span class="n">Request</span>
+<span class="kn">from</span> <span class="nn">http.client</span> <span class="kn">import</span> <span class="n">HTTPResponse</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">testspeednet.net.utils.get_exception</span> <span class="kn">import</span> <span class="n">get_exception</span>
+    <span class="kn">from</span> <span class="nn">testspeednet.net.utils.requester</span> <span class="kn">import</span> <span class="n">Requester</span>
+    <span class="kn">from</span> <span class="nn">testspeednet.net.utils.catch_request</span> <span class="kn">import</span> <span class="n">CatchRequest</span>
+    <span class="kn">from</span> <span class="nn">testspeednet.net.utils.get_response_stream</span> <span class="kn">import</span> <span class="p">(</span>
+        <span class="n">get_response_stream</span>
+    <span class="p">)</span>
+    <span class="kn">from</span> <span class="nn">testspeednet.net.utils.gzip_decoded_response</span> <span class="kn">import</span> <span class="p">(</span>
+        <span class="n">GzipDecodedResponse</span>
+    <span class="p">)</span>
+    <span class="kn">from</span> <span class="nn">testspeednet.net.utils.net_exceptions</span> <span class="kn">import</span> <span class="p">(</span>
+        <span class="n">ConfigRetrievalError</span><span class="p">,</span> <span class="n">SpeedtestConfigError</span>
+    <span class="p">)</span>
+<span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">ats_error_message</span><span class="p">:</span>
+    <span class="c1"># Force close python ATS ##################################################</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="si">{</span><span class="vm">__file__</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">ats_error_message</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Vladimir Roncevic&#39;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s1">&#39;(C) 2024, https://vroncevic.github.io/testspeednet&#39;</span>
+<span class="n">__credits__</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Vladimir Roncevic&#39;</span><span class="p">,</span> <span class="s1">&#39;Python Software Foundation&#39;</span><span class="p">]</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s1">&#39;https://github.com/vroncevic/testspeednet/blob/dev/LICENSE&#39;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;1.0.0&#39;</span>
+<span class="n">__maintainer__</span> <span class="o">=</span> <span class="s1">&#39;Vladimir Roncevic&#39;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s1">&#39;elektron.ronca@gmail.com&#39;</span>
+<span class="n">__status__</span> <span class="o">=</span> <span class="s1">&#39;Updated&#39;</span>
+
+
+<div class="viewcode-block" id="TestNetConfig">
+<a class="viewcode-back" href="../../../../testspeednet.net.utils.test_net_config.html#testspeednet.net.utils.test_net_config.TestNetConfig">[docs]</a>
+<span class="k">class</span> <span class="nc">TestNetConfig</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Defines class TestNetConfig with attribute(s) and method(s).</span>
+<span class="sd">        Provides methods to retrieve network configuration details</span>
+<span class="sd">        from speedtest.net.</span>
+
+<span class="sd">        It defines:</span>
+
+<span class="sd">            :attributes:</span>
+<span class="sd">                | _TOOL_VERBOSE - Console text indicator for process-phase.</span>
+<span class="sd">            :methods:</span>
+<span class="sd">                | get_config - Retrieves and parses the network configuration</span>
+<span class="sd">                |              from speedtest.net.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="n">_TOOL_VERBOSE</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;TEST_SPEED_NET::NET::UTILS::TEST_NET_CONFIG&#39;</span>
+
+<div class="viewcode-block" id="TestNetConfig.get_config">
+<a class="viewcode-back" href="../../../../testspeednet.net.utils.test_net_config.html#testspeednet.net.utils.test_net_config.TestNetConfig.get_config">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_config</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span> <span class="n">secure</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">opener</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">OpenerDirector</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Retrieves and parses the network configuration from speedtest.net.</span>
+
+<span class="sd">            This method fetches the network configuration XML from</span>
+<span class="sd">            speedtest.net, decodes it, and parses relevant details</span>
+<span class="sd">            such as server configurations, download/upload configurations,</span>
+<span class="sd">            client details, etc.</span>
+
+<span class="sd">            :param secure: Flag indicating whether to use secure HTTPS</span>
+<span class="sd">                           connection (default: False).</span>
+<span class="sd">            :type secure: &lt;bool&gt;</span>
+<span class="sd">            :param opener: Optional custom opener to use for the request</span>
+<span class="sd">                           (default: None).</span>
+<span class="sd">            :type opener: &lt;Optional[OpenerDirector]&gt;</span>
+<span class="sd">            :return: Dictionary containing parsed network configuration.</span>
+<span class="sd">            :rtype: &lt;Optional[Dict[str, Any]]&gt;</span>
+<span class="sd">            :exceptions: ConfigRetrievalError, SpeedtestConfigError</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">headers</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Accept-Encoding&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;gzip&#39;</span>
+        <span class="n">request</span><span class="p">:</span> <span class="n">Request</span> <span class="o">=</span> <span class="n">Requester</span><span class="o">.</span><span class="n">build_request</span><span class="p">(</span>
+            <span class="n">url</span><span class="o">=</span><span class="s1">&#39;://www.speedtest.net/speedtest-config.php&#39;</span><span class="p">,</span>
+            <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">secure</span><span class="o">=</span><span class="n">secure</span>
+        <span class="p">)</span>
+        <span class="n">uh</span><span class="p">:</span> <span class="n">HTTPResponse</span> <span class="o">|</span> <span class="kc">None</span>
+        <span class="n">e</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="ne">BaseException</span> <span class="o">|</span> <span class="kc">None</span>
+        <span class="n">uh</span><span class="p">,</span> <span class="n">e</span> <span class="o">=</span> <span class="n">CatchRequest</span><span class="o">.</span><span class="n">catch_request</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">opener</span><span class="o">=</span><span class="n">opener</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ConfigRetrievalError</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="n">configxml_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">stream</span><span class="p">:</span> <span class="n">GzipDecodedResponse</span> <span class="o">|</span> <span class="n">HTTPResponse</span> <span class="o">|</span> <span class="kc">None</span>
+        <span class="n">stream</span> <span class="o">=</span> <span class="n">get_response_stream</span><span class="p">(</span><span class="n">uh</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">bool</span><span class="p">(</span><span class="n">stream</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">while</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">configxml_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">stream</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1024</span><span class="p">))</span>
+            <span class="k">except</span> <span class="p">(</span><span class="ne">OSError</span><span class="p">,</span> <span class="ne">EOFError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">ConfigRetrievalError</span><span class="p">(</span><span class="n">get_exception</span><span class="p">())</span> <span class="kn">from</span> <span class="nn">e</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">configxml_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">break</span>
+        <span class="n">stream</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">bool</span><span class="p">(</span><span class="n">uh</span><span class="p">):</span>
+            <span class="n">uh</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">uh</span><span class="o">.</span><span class="n">code</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>  <span class="c1"># type: ignore</span>
+                <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">configxml</span><span class="p">:</span> <span class="nb">bytes</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">configxml_list</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">root</span><span class="p">:</span> <span class="n">ET</span><span class="o">.</span><span class="n">Element</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">configxml</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">ET</span><span class="o">.</span><span class="n">ParseError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">SpeedtestConfigError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s1">&#39;Malformed speedtest.net configuration: </span><span class="si">{</span><span class="n">get_exception</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span>
+        <span class="n">server_config</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+        <span class="n">server_config_element</span><span class="p">:</span> <span class="n">ET</span><span class="o">.</span><span class="n">Element</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;server-config&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">server_config_element</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">server_config</span> <span class="o">=</span> <span class="n">server_config_element</span><span class="o">.</span><span class="n">attrib</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">SpeedtestConfigError</span><span class="p">(</span><span class="s1">&#39;Server config not found in XML&#39;</span><span class="p">)</span>
+        <span class="n">download</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+        <span class="n">download_element</span><span class="p">:</span> <span class="n">ET</span><span class="o">.</span><span class="n">Element</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;download&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">download_element</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">download</span> <span class="o">=</span> <span class="n">download_element</span><span class="o">.</span><span class="n">attrib</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">SpeedtestConfigError</span><span class="p">(</span><span class="s1">&#39;download config not found in XML&#39;</span><span class="p">)</span>
+        <span class="n">upload</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+        <span class="n">upload_element</span><span class="p">:</span> <span class="n">ET</span><span class="o">.</span><span class="n">Element</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;upload&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">upload_element</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">upload</span> <span class="o">=</span> <span class="n">upload_element</span><span class="o">.</span><span class="n">attrib</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">SpeedtestConfigError</span><span class="p">(</span><span class="s1">&#39;upload config not found in XML&#39;</span><span class="p">)</span>
+        <span class="n">client</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+        <span class="n">client_element</span><span class="p">:</span> <span class="n">ET</span><span class="o">.</span><span class="n">Element</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;client&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">client_element</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">client</span> <span class="o">=</span> <span class="n">client_element</span><span class="o">.</span><span class="n">attrib</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">SpeedtestConfigError</span><span class="p">(</span><span class="s1">&#39;client config not found in XML&#39;</span><span class="p">)</span>
+        <span class="n">ignore_servers</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">server_config</span><span class="p">[</span><span class="s1">&#39;ignoreids&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)))</span>
+        <span class="n">ratio</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">upload</span><span class="p">[</span><span class="s1">&#39;ratio&#39;</span><span class="p">])</span>
+        <span class="n">upload_max</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">upload</span><span class="p">[</span><span class="s1">&#39;maxchunkcount&#39;</span><span class="p">])</span>
+        <span class="n">up_sizes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="mi">32768</span><span class="p">,</span> <span class="mi">65536</span><span class="p">,</span> <span class="mi">131072</span><span class="p">,</span> <span class="mi">262144</span><span class="p">,</span> <span class="mi">524288</span><span class="p">,</span> <span class="mi">1048576</span><span class="p">,</span> <span class="mi">7340032</span>
+        <span class="p">]</span>
+        <span class="n">sizes</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;upload&#39;</span><span class="p">:</span> <span class="n">up_sizes</span><span class="p">[</span><span class="n">ratio</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:],</span>
+            <span class="s1">&#39;download&#39;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="mi">350</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">750</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">2500</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">3500</span><span class="p">,</span> <span class="mi">4000</span>
+            <span class="p">]</span>
+        <span class="p">}</span>
+        <span class="n">size_count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sizes</span><span class="p">[</span><span class="s1">&#39;upload&#39;</span><span class="p">])</span>
+        <span class="n">upload_count</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">ceil</span><span class="p">(</span><span class="n">upload_max</span> <span class="o">/</span> <span class="n">size_count</span><span class="p">))</span>
+        <span class="n">counts</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;upload&#39;</span><span class="p">:</span> <span class="n">upload_count</span><span class="p">,</span>
+            <span class="s1">&#39;download&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">download</span><span class="p">[</span><span class="s1">&#39;threadsperurl&#39;</span><span class="p">])</span>
+        <span class="p">}</span>
+        <span class="n">threads</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;upload&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">upload</span><span class="p">[</span><span class="s1">&#39;threads&#39;</span><span class="p">]),</span>
+            <span class="s1">&#39;download&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">server_config</span><span class="p">[</span><span class="s1">&#39;threadcount&#39;</span><span class="p">])</span> <span class="o">*</span> <span class="mi">2</span>
+        <span class="p">}</span>
+        <span class="n">length</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;upload&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">upload</span><span class="p">[</span><span class="s1">&#39;testlength&#39;</span><span class="p">]),</span>
+            <span class="s1">&#39;download&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">download</span><span class="p">[</span><span class="s1">&#39;testlength&#39;</span><span class="p">])</span>
+        <span class="p">}</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">config</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;config&#39;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s1">&#39;client&#39;</span><span class="p">:</span> <span class="n">client</span><span class="p">,</span>
+                    <span class="s1">&#39;ignore_servers&#39;</span><span class="p">:</span> <span class="n">ignore_servers</span><span class="p">,</span>
+                    <span class="s1">&#39;sizes&#39;</span><span class="p">:</span> <span class="n">sizes</span><span class="p">,</span>
+                    <span class="s1">&#39;counts&#39;</span><span class="p">:</span> <span class="n">counts</span><span class="p">,</span>
+                    <span class="s1">&#39;threads&#39;</span><span class="p">:</span> <span class="n">threads</span><span class="p">,</span>
+                    <span class="s1">&#39;length&#39;</span><span class="p">:</span> <span class="n">length</span><span class="p">,</span>
+                    <span class="s1">&#39;upload_max&#39;</span><span class="p">:</span> <span class="n">upload_count</span> <span class="o">*</span> <span class="n">size_count</span>
+                <span class="p">},</span>
+                <span class="s1">&#39;lat_lon&#39;</span><span class="p">:</span> <span class="p">(</span>
+                    <span class="nb">float</span><span class="p">(</span><span class="n">client</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">client</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">])</span>
+                <span class="p">)</span>
+            <span class="p">}</span>
+            <span class="k">return</span> <span class="n">config</span>
+        <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">SpeedtestConfigError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s1">&#39;Unknown loc: lat=</span><span class="si">{</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;lat&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1"> lon=</span><span class="si">{</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;lon&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span></div>
+</div>
+
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">testspeednet https://github.com/vroncevic/testspeednet/releases documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../../testspeednet.html" >testspeednet</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../../net.html" >testspeednet.net</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">testspeednet.net.utils.test_net_config</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2024, Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    </div>
+  </body>
+</html>

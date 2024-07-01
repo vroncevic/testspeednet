@@ -72,7 +72,7 @@ setup(
     keywords='Unix, Linux, Development, Speed, Net',
     platforms='POSIX',
     classifiers=PYP_CLASSIFIERS,
-    packages=['testspeednet', 'testspeednet.net'],
+    packages=['testspeednet', 'testspeednet.net', 'testspeednet.net.utils'],
     install_requires=['ats-utilities'],
     package_data={
         'testspeednet': [

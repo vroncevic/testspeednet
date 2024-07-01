@@ -106,29 +106,56 @@ You can use Dockerfile to create image/container.
 
 **testspeednet** is based on OOP
 
-Generator structure
+Tool structure
 
 ```bash
     testspeednet/
-         ├── conf/
-         │   ├── apis.yaml
-         │   ├── testspeednet.cfg
-         │   ├── testspeednet.logo
-         │   └── testspeednet_util.cfg
-         ├── __init__.py
-         ├── log/
-         │   └── testspeednet.log
-         ├── net/
-         │   ├── config.py
-         │   ├── download.py
-         │   ├── __init__.py
-         │   ├── model.py
-         │   ├── speed.py
-         │   └── upload.py
-         └── run/
-             └── testspeednet_run.py
+          ├── conf/
+          │   ├── apis.yaml
+          │   ├── testspeednet.cfg
+          │   ├── testspeednet.logo
+          │   └── testspeednet_util.cfg
+          ├── __init__.py
+          ├── log/
+          │   └── testspeednet.log
+          ├── net/
+          │   ├── config.py
+          │   ├── download.py
+          │   ├── __init__.py
+          │   ├── model.py
+          │   ├── speed.py
+          │   ├── test.py
+          │   ├── upload.py
+          │   └── utils/
+          │       ├── catch_request.py
+          │       ├── checking_servers.py
+          │       ├── connector.py
+          │       ├── distance.py
+          │       ├── do_nothing_factory.py
+          │       ├── fake_shutdown_event.py
+          │       ├── get_exception_factory.py
+          │       ├── get_response_stream_factory.py
+          │       ├── gzip_decoded_response.py
+          │       ├── http_downloader.py
+          │       ├── http_uploader_data.py
+          │       ├── http_uploader.py
+          │       ├── __init__.py
+          │       ├── net_exceptions.py
+          │       ├── opener.py
+          │       ├── printer_factory.py
+          │       ├── requester.py
+          │       ├── test_http_connection.py
+          │       ├── test_http_handler.py
+          │       ├── test_https_connection.py
+          │       ├── test_https_handler.py
+          │       ├── test_net_config.py
+          │       ├── test_results.py
+          │       └── user_agent.py
+          ├── py.typed
+          └── run/
+              └── testspeednet_run.py
     
-    5 directories, 13 files
+    6 directories, 39 files
 ```
 
 ### Docs

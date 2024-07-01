@@ -25,6 +25,8 @@ from typing import Any, Dict, List
 
 try:
     from ats_utilities.console_io.verbose import verbose_message
+    from ats_utilities.console_io.success import success_message
+    from testspeednet.net.test import TestNet
 except ImportError as ats_error_message:
     # Force close python ATS ##################################################
     sys.exit(f'\n{__file__}\n{ats_error_message}\n')
@@ -71,6 +73,7 @@ class Upload:
             verbose, [f'{self._TOOL_VERBOSE.lower()} init upload command']
         )
         self.config: Dict[Any, Any] = config
+        self.st: TestNet = TestNet(secure=True)
 
     def execute(self, verbose: bool = False) -> bool:
         '''
@@ -83,11 +86,14 @@ class Upload:
             :exceptions: None
         '''
         verbose_message(
-            verbose, [f'{self._TOOL_VERBOSE.lower()} performs uplod check']
+            verbose, [f'{self._TOOL_VERBOSE.lower()} performs upload check']
         )
+        speed: Dict[str, float] = self._upload()
+        upload: float = speed['upload']
+        success_message([f'{self._TOOL_VERBOSE.lower()} Upload: {upload} Mbs'])
         return True
 
-    def _upload(self) -> List[Any]:
+    def _upload(self) -> Dict[str, float]:
         '''
             Upload command operation.
 
@@ -97,5 +103,4 @@ class Upload:
             :rtype: List[Any]
             :exceptions: None
         '''
-        upload_info: List[Any] = []
-        return upload_info
+        return {'upload': self.st.upload() / 1000000}

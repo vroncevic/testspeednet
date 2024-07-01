@@ -25,8 +25,8 @@ from typing import Any, Dict, List
 
 try:
     from ats_utilities.console_io.verbose import verbose_message
-    from testspeednet.net.download import Download
-    from testspeednet.net.upload import Upload
+    from ats_utilities.console_io.success import success_message
+    from testspeednet.net.test import TestNet
 except ImportError as ats_error_message:
     # Force close python ATS ##################################################
     sys.exit(f'\n{__file__}\n{ats_error_message}\n')
@@ -41,7 +41,7 @@ __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
 
 
-class Speed(Download, Upload):
+class Speed:
     '''
         Defines class Speed with attribute(s) and method(s).
         Defines speed operation for getting download/upload net info.
@@ -69,12 +69,11 @@ class Speed(Download, Upload):
             :type verbose: <bool>
             :exceptions: None
         '''
-        Download.__init__(self, config, verbose)
-        Upload.__init__(self, config, verbose)
         verbose_message(
             verbose, [f'{self._TOOL_VERBOSE.lower()} init speed command']
         )
-        self.config = config
+        self.config: Dict[Any, Any] = config
+        self.st: TestNet = TestNet(secure=True)
 
     def execute(self, verbose: bool = False) -> bool:
         '''
@@ -89,9 +88,18 @@ class Speed(Download, Upload):
         verbose_message(
             verbose, [f'{self._TOOL_VERBOSE.lower()} performs speed check']
         )
+        speed: Dict[str, float] = self._speed()
+        download: float = speed['download']
+        upload: float = speed['upload']
+        success_message([
+            f'{self._TOOL_VERBOSE.lower()} Download: {download} Mbs'
+        ])
+        success_message([
+            f'{self._TOOL_VERBOSE.lower()} Upload: {upload} Mbs'
+        ])
         return True
 
-    def _speed(self) -> List[Any]:
+    def _speed(self) -> Dict[str, float]:
         '''
             Speed command operation.
 
@@ -101,5 +109,7 @@ class Speed(Download, Upload):
             :rtype: List[Any]
             :exceptions: None
         '''
-        download_info: List[Any] = []
-        return download_info
+        return {
+            'download': self.st.download() / 1000000,
+            'upload': self.st.upload() / 1000000
+        }
