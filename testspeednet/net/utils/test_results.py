@@ -141,7 +141,7 @@ class TestResults:
 
             :return: String representation of TestResults
             :rtype: <Optional[str]>
-            :exceptions: None
+            :exceptions: ShareResultsSubmitFailure | ShareResultsConnectFailure
         '''
         if self._share:
             return self._share
@@ -152,7 +152,7 @@ class TestResults:
             (f'{ping}-{upload}-{download}-297aae72').encode()
         ).hexdigest()
         api_data: List[str] = [
-            f'recommendedserverid={self.server['id']}',
+            f'recommendedserverid={self.server["id"]}',
             f'ping={ping}',
             'screenresolution=',
             'promo=',
@@ -166,7 +166,7 @@ class TestResults:
             'accuracy=1',
             f'bytesreceived={self.bytes_received}',
             f'bytessent={self.bytes_sent}',
-            f'serverid={self.server['id']}'
+            f'serverid={self.server["id"]}'
         ]
         headers: Dict[str, str] = {
             'Referer': 'http://c.speedtest.net/flash/speedtest.swf'

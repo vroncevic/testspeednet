@@ -49,19 +49,36 @@
             
   <section id="module-testspeednet.net.utils.net_exceptions">
 <span id="testspeednet-net-utils-net-exceptions-module"></span><h1>testspeednet.net.utils.net_exceptions module<a class="headerlink" href="#module-testspeednet.net.utils.net_exceptions" title="Link to this heading">¶</a></h1>
-<p>…</p>
+<dl class="simple">
+<dt>Module</dt><dd><p>net_exceptions.py</p>
+</dd>
+<dt>Copyright</dt><dd><p>Copyright (C) 2016 - 2024 Vladimir Roncevic &lt;<a class="reference external" href="mailto:elektron&#46;ronca&#37;&#52;&#48;gmail&#46;com">elektron<span>&#46;</span>ronca<span>&#64;</span>gmail<span>&#46;</span>com</a>&gt;
+testspeednet is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by the
+Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+testspeednet is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+See the GNU General Public License for more details.
+You should have received a copy of the GNU General Public License along
+with this program. If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+</dd>
+<dt>Info</dt><dd><p>Defines class exceptions.</p>
+</dd>
+</dl>
 <dl class="py exception">
 <dt class="sig sig-object py" id="testspeednet.net.utils.net_exceptions.ConfigRetrievalError">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testspeednet.net.utils.net_exceptions.</span></span><span class="sig-name descname"><span class="pre">ConfigRetrievalError</span></span><a class="reference internal" href="_modules/testspeednet/net/utils/net_exceptions.html#ConfigRetrievalError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testspeednet.net.utils.net_exceptions.ConfigRetrievalError" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#testspeednet.net.utils.net_exceptions.SpeedtestHTTPError" title="testspeednet.net.utils.net_exceptions.SpeedtestHTTPError"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpeedtestHTTPError</span></code></a></p>
-<p>Could not retrieve config.php</p>
+<p>Could not retrieve config.php.</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="testspeednet.net.utils.net_exceptions.InvalidServerIDType">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testspeednet.net.utils.net_exceptions.</span></span><span class="sig-name descname"><span class="pre">InvalidServerIDType</span></span><a class="reference internal" href="_modules/testspeednet/net/utils/net_exceptions.html#InvalidServerIDType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testspeednet.net.utils.net_exceptions.InvalidServerIDType" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#testspeednet.net.utils.net_exceptions.SpeedtestException" title="testspeednet.net.utils.net_exceptions.SpeedtestException"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpeedtestException</span></code></a></p>
-<p>Server ID used for filtering was not an integer</p>
+<p>Server ID used for filtering was not an integer.</p>
 </dd></dl>
 
 <dl class="py exception">
@@ -69,100 +86,101 @@
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testspeednet.net.utils.net_exceptions.</span></span><span class="sig-name descname"><span class="pre">InvalidSpeedtestMiniServer</span></span><a class="reference internal" href="_modules/testspeednet/net/utils/net_exceptions.html#InvalidSpeedtestMiniServer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testspeednet.net.utils.net_exceptions.InvalidSpeedtestMiniServer" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#testspeednet.net.utils.net_exceptions.SpeedtestException" title="testspeednet.net.utils.net_exceptions.SpeedtestException"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpeedtestException</span></code></a></p>
 <p>Server provided as a speedtest mini server does not actually appear
-to be a speedtest mini server</p>
+to be a speedtest mini server.</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="testspeednet.net.utils.net_exceptions.NoMatchedServers">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testspeednet.net.utils.net_exceptions.</span></span><span class="sig-name descname"><span class="pre">NoMatchedServers</span></span><a class="reference internal" href="_modules/testspeednet/net/utils/net_exceptions.html#NoMatchedServers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testspeednet.net.utils.net_exceptions.NoMatchedServers" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#testspeednet.net.utils.net_exceptions.SpeedtestException" title="testspeednet.net.utils.net_exceptions.SpeedtestException"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpeedtestException</span></code></a></p>
-<p>No servers matched when filtering</p>
+<p>No servers matched when filtering.</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="testspeednet.net.utils.net_exceptions.ServersRetrievalError">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testspeednet.net.utils.net_exceptions.</span></span><span class="sig-name descname"><span class="pre">ServersRetrievalError</span></span><a class="reference internal" href="_modules/testspeednet/net/utils/net_exceptions.html#ServersRetrievalError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testspeednet.net.utils.net_exceptions.ServersRetrievalError" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#testspeednet.net.utils.net_exceptions.SpeedtestHTTPError" title="testspeednet.net.utils.net_exceptions.SpeedtestHTTPError"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpeedtestHTTPError</span></code></a></p>
-<p>Could not retrieve speedtest-servers.php</p>
+<p>Could not retrieve speedtest-servers.php.</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="testspeednet.net.utils.net_exceptions.ShareResultsConnectFailure">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testspeednet.net.utils.net_exceptions.</span></span><span class="sig-name descname"><span class="pre">ShareResultsConnectFailure</span></span><a class="reference internal" href="_modules/testspeednet/net/utils/net_exceptions.html#ShareResultsConnectFailure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testspeednet.net.utils.net_exceptions.ShareResultsConnectFailure" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#testspeednet.net.utils.net_exceptions.SpeedtestException" title="testspeednet.net.utils.net_exceptions.SpeedtestException"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpeedtestException</span></code></a></p>
-<p>Could not connect to speedtest.net API to POST results</p>
+<p>Could not connect to speedtest.net API to POST results.</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="testspeednet.net.utils.net_exceptions.ShareResultsSubmitFailure">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testspeednet.net.utils.net_exceptions.</span></span><span class="sig-name descname"><span class="pre">ShareResultsSubmitFailure</span></span><a class="reference internal" href="_modules/testspeednet/net/utils/net_exceptions.html#ShareResultsSubmitFailure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testspeednet.net.utils.net_exceptions.ShareResultsSubmitFailure" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#testspeednet.net.utils.net_exceptions.SpeedtestException" title="testspeednet.net.utils.net_exceptions.SpeedtestException"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpeedtestException</span></code></a></p>
-<p>Unable to successfully POST results to speedtest.net API after
-connection</p>
+<p>Unable to successfully POST results to speedtest.net
+API after connection.</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="testspeednet.net.utils.net_exceptions.SpeedtestBestServerFailure">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testspeednet.net.utils.net_exceptions.</span></span><span class="sig-name descname"><span class="pre">SpeedtestBestServerFailure</span></span><a class="reference internal" href="_modules/testspeednet/net/utils/net_exceptions.html#SpeedtestBestServerFailure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testspeednet.net.utils.net_exceptions.SpeedtestBestServerFailure" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#testspeednet.net.utils.net_exceptions.SpeedtestException" title="testspeednet.net.utils.net_exceptions.SpeedtestException"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpeedtestException</span></code></a></p>
-<p>Unable to determine best server</p>
+<p>Unable to determine best server.</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="testspeednet.net.utils.net_exceptions.SpeedtestCLIError">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testspeednet.net.utils.net_exceptions.</span></span><span class="sig-name descname"><span class="pre">SpeedtestCLIError</span></span><a class="reference internal" href="_modules/testspeednet/net/utils/net_exceptions.html#SpeedtestCLIError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testspeednet.net.utils.net_exceptions.SpeedtestCLIError" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#testspeednet.net.utils.net_exceptions.SpeedtestException" title="testspeednet.net.utils.net_exceptions.SpeedtestException"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpeedtestException</span></code></a></p>
-<p>Generic exception for raising errors during CLI operation</p>
+<p>Generic exception for raising errors during CLI operation.</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="testspeednet.net.utils.net_exceptions.SpeedtestConfigError">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testspeednet.net.utils.net_exceptions.</span></span><span class="sig-name descname"><span class="pre">SpeedtestConfigError</span></span><a class="reference internal" href="_modules/testspeednet/net/utils/net_exceptions.html#SpeedtestConfigError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testspeednet.net.utils.net_exceptions.SpeedtestConfigError" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#testspeednet.net.utils.net_exceptions.SpeedtestException" title="testspeednet.net.utils.net_exceptions.SpeedtestException"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpeedtestException</span></code></a></p>
-<p>Configuration XML is invalid</p>
+<p>Configuration XML is invalid.</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="testspeednet.net.utils.net_exceptions.SpeedtestException">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testspeednet.net.utils.net_exceptions.</span></span><span class="sig-name descname"><span class="pre">SpeedtestException</span></span><a class="reference internal" href="_modules/testspeednet/net/utils/net_exceptions.html#SpeedtestException"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testspeednet.net.utils.net_exceptions.SpeedtestException" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
-<p>Base exception for this module</p>
+<p>Base exception for this module.</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="testspeednet.net.utils.net_exceptions.SpeedtestHTTPError">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testspeednet.net.utils.net_exceptions.</span></span><span class="sig-name descname"><span class="pre">SpeedtestHTTPError</span></span><a class="reference internal" href="_modules/testspeednet/net/utils/net_exceptions.html#SpeedtestHTTPError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testspeednet.net.utils.net_exceptions.SpeedtestHTTPError" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#testspeednet.net.utils.net_exceptions.SpeedtestException" title="testspeednet.net.utils.net_exceptions.SpeedtestException"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpeedtestException</span></code></a></p>
-<p>Base HTTP exception for this module</p>
+<p>Base HTTP exception for this module.</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="testspeednet.net.utils.net_exceptions.SpeedtestMiniConnectFailure">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testspeednet.net.utils.net_exceptions.</span></span><span class="sig-name descname"><span class="pre">SpeedtestMiniConnectFailure</span></span><a class="reference internal" href="_modules/testspeednet/net/utils/net_exceptions.html#SpeedtestMiniConnectFailure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testspeednet.net.utils.net_exceptions.SpeedtestMiniConnectFailure" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#testspeednet.net.utils.net_exceptions.SpeedtestException" title="testspeednet.net.utils.net_exceptions.SpeedtestException"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpeedtestException</span></code></a></p>
-<p>Could not connect to the provided speedtest mini server</p>
+<p>Could not connect to the provided speedtest mini server.</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="testspeednet.net.utils.net_exceptions.SpeedtestMissingBestServer">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testspeednet.net.utils.net_exceptions.</span></span><span class="sig-name descname"><span class="pre">SpeedtestMissingBestServer</span></span><a class="reference internal" href="_modules/testspeednet/net/utils/net_exceptions.html#SpeedtestMissingBestServer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testspeednet.net.utils.net_exceptions.SpeedtestMissingBestServer" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#testspeednet.net.utils.net_exceptions.SpeedtestException" title="testspeednet.net.utils.net_exceptions.SpeedtestException"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpeedtestException</span></code></a></p>
-<p>get_best_server not called or not able to determine best server</p>
+<p>get_best_server not called or not able to determine best server.</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="testspeednet.net.utils.net_exceptions.SpeedtestServersError">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testspeednet.net.utils.net_exceptions.</span></span><span class="sig-name descname"><span class="pre">SpeedtestServersError</span></span><a class="reference internal" href="_modules/testspeednet/net/utils/net_exceptions.html#SpeedtestServersError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testspeednet.net.utils.net_exceptions.SpeedtestServersError" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#testspeednet.net.utils.net_exceptions.SpeedtestException" title="testspeednet.net.utils.net_exceptions.SpeedtestException"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpeedtestException</span></code></a></p>
-<p>Servers XML is invalid</p>
+<p>Servers XML is invalid.</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="testspeednet.net.utils.net_exceptions.SpeedtestUploadTimeout">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testspeednet.net.utils.net_exceptions.</span></span><span class="sig-name descname"><span class="pre">SpeedtestUploadTimeout</span></span><a class="reference internal" href="_modules/testspeednet/net/utils/net_exceptions.html#SpeedtestUploadTimeout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testspeednet.net.utils.net_exceptions.SpeedtestUploadTimeout" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#testspeednet.net.utils.net_exceptions.SpeedtestException" title="testspeednet.net.utils.net_exceptions.SpeedtestException"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpeedtestException</span></code></a></p>
-<p>testlength configuration reached during upload
-Used to ensure the upload halts when no additional data should be sent</p>
+<p>Test length configuration reached during upload.
+Used to ensure the upload halts when no additional
+data should be sent.</p>
 </dd></dl>
 
 </section>

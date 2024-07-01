@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>testspeednet.net.utils.distance module &#8212; testspeednet https://github.com/vroncevic/testspeednet/releases documentation</title>
+    <title>testspeednet.net.utils.get_response_stream module &#8212; testspeednet https://github.com/vroncevic/testspeednet/releases documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="_static/classic.css?v=514cf933" />
     
@@ -15,8 +15,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="testspeednet.net.utils.do_nothing module" href="testspeednet.net.utils.do_nothing.html" />
-    <link rel="prev" title="testspeednet.net.utils.connector module" href="testspeednet.net.utils.connector.html" /> 
+    <link rel="next" title="testspeednet.net.utils.gzip_decoded_response module" href="testspeednet.net.utils.gzip_decoded_response.html" />
+    <link rel="prev" title="testspeednet.net.utils.get_exception module" href="testspeednet.net.utils.get_exception.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -28,17 +28,17 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="testspeednet.net.utils.do_nothing.html" title="testspeednet.net.utils.do_nothing module"
+          <a href="testspeednet.net.utils.gzip_decoded_response.html" title="testspeednet.net.utils.gzip_decoded_response module"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="testspeednet.net.utils.connector.html" title="testspeednet.net.utils.connector module"
+          <a href="testspeednet.net.utils.get_exception.html" title="testspeednet.net.utils.get_exception module"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">testspeednet https://github.com/vroncevic/testspeednet/releases documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="modules.html" >testspeednet</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="testspeednet.html" >testspeednet package</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="testspeednet.net.html" >testspeednet.net package</a> &#187;</li>
           <li class="nav-item nav-item-4"><a href="testspeednet.net.utils.html" accesskey="U">testspeednet.net.utils package</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">testspeednet.net.utils.distance module</a></li> 
+        <li class="nav-item nav-item-this"><a href="">testspeednet.net.utils.get_response_stream module</a></li> 
       </ul>
     </div>  
 
@@ -47,10 +47,10 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="module-testspeednet.net.utils.distance">
-<span id="testspeednet-net-utils-distance-module"></span><h1>testspeednet.net.utils.distance module<a class="headerlink" href="#module-testspeednet.net.utils.distance" title="Link to this heading">¶</a></h1>
+  <section id="module-testspeednet.net.utils.get_response_stream">
+<span id="testspeednet-net-utils-get-response-stream-module"></span><h1>testspeednet.net.utils.get_response_stream module<a class="headerlink" href="#module-testspeednet.net.utils.get_response_stream" title="Link to this heading">¶</a></h1>
 <dl class="simple">
-<dt>Module</dt><dd><p>distance.py</p>
+<dt>Module</dt><dd><p>get_response_stream.py</p>
 </dd>
 <dt>Copyright</dt><dd><p>Copyright (C) 2016 - 2024 Vladimir Roncevic &lt;<a class="reference external" href="mailto:elektron&#46;ronca&#37;&#52;&#48;gmail&#46;com">elektron<span>&#46;</span>ronca<span>&#64;</span>gmail<span>&#46;</span>com</a>&gt;
 testspeednet is free software: you can redistribute it and/or modify
@@ -64,28 +64,23 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along
 with this program. If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
 </dd>
-<dt>Info</dt><dd><p>Defines function distance.
-Calculates the great-circle distance between two points
-on the Earth’s surface.</p>
+<dt>Info</dt><dd><p>Defines function get_response_stream.
+Retrieves a response stream, optionally decoding it if gzip-encoded.</p>
 </dd>
 </dl>
 <dl class="py function">
-<dt class="sig sig-object py" id="testspeednet.net.utils.distance.distance">
-<span class="sig-prename descclassname"><span class="pre">testspeednet.net.utils.distance.</span></span><span class="sig-name descname"><span class="pre">distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">origin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/testspeednet/net/utils/distance.html#distance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testspeednet.net.utils.distance.distance" title="Link to this definition">¶</a></dt>
-<dd><p>Calculates the great-circle distance between two points
-on the Earth’s surface.</p>
+<dt class="sig sig-object py" id="testspeednet.net.utils.get_response_stream.get_response_stream">
+<span class="sig-prename descclassname"><span class="pre">testspeednet.net.utils.get_response_stream.</span></span><span class="sig-name descname"><span class="pre">get_response_stream</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">HTTPResponse</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="testspeednet.net.utils.gzip_decoded_response.html#testspeednet.net.utils.gzip_decoded_response.GzipDecodedResponse" title="testspeednet.net.utils.gzip_decoded_response.GzipDecodedResponse"><span class="pre">GzipDecodedResponse</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">HTTPResponse</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/testspeednet/net/utils/get_response_stream.html#get_response_stream"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testspeednet.net.utils.get_response_stream.get_response_stream" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves a response stream, optionally decoding it if gzip-encoded.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>origin</strong> (<em>&lt;Tuple</em><em>[</em><em>float</em><em>, </em><em>float</em><em>]</em><em>&gt;</em>) – Coordinates of the origin point (lat, lon)</p></li>
-<li><p><strong>destination</strong> (<em>&lt;Tuple</em><em>[</em><em>float</em><em>, </em><em>float</em><em>]</em><em>&gt;</em>) – Coordinates of the destination point (lat, lon)</p></li>
-</ul>
+<dd class="field-odd"><p><strong>response</strong> (<em>&lt;Optional</em><em>[</em><em>HTTPResponse</em><em>]</em><em>&gt;</em>) – The HTTP response object</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Distance between the two points in kilometers</p>
+<dd class="field-even"><p>Either a GzipDecodedResponse or the original HTTPResponse</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>&lt;float&gt;</p>
+<dd class="field-odd"><p>&lt;Optional[<a class="reference internal" href="testspeednet.net.utils.gzip_decoded_response.html#testspeednet.net.utils.gzip_decoded_response.GzipDecodedResponse" title="testspeednet.net.utils.gzip_decoded_response.GzipDecodedResponse">GzipDecodedResponse</a> | HTTPResponse]&gt;</p>
 </dd>
 <dt class="field-even">Exceptions<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
@@ -105,8 +100,8 @@ on the Earth’s surface.</p>
   <div>
     <h3><a href="index.html">Table of Contents</a></h3>
     <ul>
-<li><a class="reference internal" href="#">testspeednet.net.utils.distance module</a><ul>
-<li><a class="reference internal" href="#testspeednet.net.utils.distance.distance"><code class="docutils literal notranslate"><span class="pre">distance()</span></code></a></li>
+<li><a class="reference internal" href="#">testspeednet.net.utils.get_response_stream module</a><ul>
+<li><a class="reference internal" href="#testspeednet.net.utils.get_response_stream.get_response_stream"><code class="docutils literal notranslate"><span class="pre">get_response_stream()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -114,18 +109,18 @@ on the Earth’s surface.</p>
   </div>
   <div>
     <h4>Previous topic</h4>
-    <p class="topless"><a href="testspeednet.net.utils.connector.html"
-                          title="previous chapter">testspeednet.net.utils.connector module</a></p>
+    <p class="topless"><a href="testspeednet.net.utils.get_exception.html"
+                          title="previous chapter">testspeednet.net.utils.get_exception module</a></p>
   </div>
   <div>
     <h4>Next topic</h4>
-    <p class="topless"><a href="testspeednet.net.utils.do_nothing.html"
-                          title="next chapter">testspeednet.net.utils.do_nothing module</a></p>
+    <p class="topless"><a href="testspeednet.net.utils.gzip_decoded_response.html"
+                          title="next chapter">testspeednet.net.utils.gzip_decoded_response module</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/testspeednet.net.utils.distance.rst.txt"
+      <li><a href="_sources/testspeednet.net.utils.get_response_stream.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -153,17 +148,17 @@ on the Earth’s surface.</p>
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="testspeednet.net.utils.do_nothing.html" title="testspeednet.net.utils.do_nothing module"
+          <a href="testspeednet.net.utils.gzip_decoded_response.html" title="testspeednet.net.utils.gzip_decoded_response module"
              >next</a> |</li>
         <li class="right" >
-          <a href="testspeednet.net.utils.connector.html" title="testspeednet.net.utils.connector module"
+          <a href="testspeednet.net.utils.get_exception.html" title="testspeednet.net.utils.get_exception module"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">testspeednet https://github.com/vroncevic/testspeednet/releases documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="modules.html" >testspeednet</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="testspeednet.html" >testspeednet package</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="testspeednet.net.html" >testspeednet.net package</a> &#187;</li>
           <li class="nav-item nav-item-4"><a href="testspeednet.net.utils.html" >testspeednet.net.utils package</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">testspeednet.net.utils.distance module</a></li> 
+        <li class="nav-item nav-item-this"><a href="">testspeednet.net.utils.get_response_stream module</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

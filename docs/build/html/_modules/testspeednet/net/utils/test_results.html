@@ -185,7 +185,7 @@
 
 <span class="sd">            :return: String representation of TestResults</span>
 <span class="sd">            :rtype: &lt;Optional[str]&gt;</span>
-<span class="sd">            :exceptions: None</span>
+<span class="sd">            :exceptions: ShareResultsSubmitFailure | ShareResultsConnectFailure</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_share</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_share</span>
@@ -196,7 +196,7 @@
             <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">ping</span><span class="si">}</span><span class="s1">-</span><span class="si">{</span><span class="n">upload</span><span class="si">}</span><span class="s1">-</span><span class="si">{</span><span class="n">download</span><span class="si">}</span><span class="s1">-297aae72&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
         <span class="p">)</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
         <span class="n">api_data</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="sa">f</span><span class="s1">&#39;recommendedserverid=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;recommendedserverid=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
             <span class="sa">f</span><span class="s1">&#39;ping=</span><span class="si">{</span><span class="n">ping</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
             <span class="s1">&#39;screenresolution=&#39;</span><span class="p">,</span>
             <span class="s1">&#39;promo=&#39;</span><span class="p">,</span>
@@ -210,7 +210,7 @@
             <span class="s1">&#39;accuracy=1&#39;</span><span class="p">,</span>
             <span class="sa">f</span><span class="s1">&#39;bytesreceived=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">bytes_received</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
             <span class="sa">f</span><span class="s1">&#39;bytessent=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">bytes_sent</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
-            <span class="sa">f</span><span class="s1">&#39;serverid=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="sa">f</span><span class="s1">&#39;serverid=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span>
         <span class="p">]</span>
         <span class="n">headers</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s1">&#39;Referer&#39;</span><span class="p">:</span> <span class="s1">&#39;http://c.speedtest.net/flash/speedtest.swf&#39;</span>

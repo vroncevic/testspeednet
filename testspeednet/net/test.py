@@ -34,7 +34,7 @@ try:
     from testspeednet.net.utils.http_uploader import HTTPUploader
     from testspeednet.net.utils.http_uploader_data import HTTPUploaderData
     from testspeednet.net.utils.test_results import TestResults
-    from testspeednet.net.utils.do_nothing_factory import do_nothing
+    from testspeednet.net.utils.do_nothing import do_nothing
     from testspeednet.net.utils.requester import Requester
     from testspeednet.net.utils.opener import Opener
     from testspeednet.net.utils.test_net_config import TestNetConfig

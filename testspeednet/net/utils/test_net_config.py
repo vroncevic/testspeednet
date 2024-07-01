@@ -29,10 +29,10 @@ from urllib.request import OpenerDirector, Request
 from http.client import HTTPResponse
 
 try:
-    from testspeednet.net.utils.get_exception_factory import get_exception
+    from testspeednet.net.utils.get_exception import get_exception
     from testspeednet.net.utils.requester import Requester
     from testspeednet.net.utils.catch_request import CatchRequest
-    from testspeednet.net.utils.get_response_stream_factory import (
+    from testspeednet.net.utils.get_response_stream import (
         get_response_stream
     )
     from testspeednet.net.utils.gzip_decoded_response import (
@@ -197,5 +197,5 @@ class TestNetConfig:
             return config
         except ValueError as e:
             raise SpeedtestConfigError(
-                f'Unknown loc: lat={client.get('lat')} lon={client.get('lon')}'
+                f'Unknown loc: lat={client.get("lat")} lon={client.get("lon")}'
             ) from e

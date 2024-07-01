@@ -11,17 +11,17 @@ Submodules
    testspeednet.net.utils.checking_servers
    testspeednet.net.utils.connector
    testspeednet.net.utils.distance
-   testspeednet.net.utils.do_nothing_factory
+   testspeednet.net.utils.do_nothing
    testspeednet.net.utils.fake_shutdown_event
-   testspeednet.net.utils.get_exception_factory
-   testspeednet.net.utils.get_response_stream_factory
+   testspeednet.net.utils.get_exception
+   testspeednet.net.utils.get_response_stream
    testspeednet.net.utils.gzip_decoded_response
    testspeednet.net.utils.http_downloader
    testspeednet.net.utils.http_uploader
    testspeednet.net.utils.http_uploader_data
    testspeednet.net.utils.net_exceptions
    testspeednet.net.utils.opener
-   testspeednet.net.utils.printer_factory
+   testspeednet.net.utils.printer
    testspeednet.net.utils.requester
    testspeednet.net.utils.test_http_connection
    testspeednet.net.utils.test_http_handler

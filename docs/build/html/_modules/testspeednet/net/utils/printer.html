@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>testspeednet.net.utils.printer_factory &#8212; testspeednet https://github.com/vroncevic/testspeednet/releases documentation</title>
+    <title>testspeednet.net.utils.printer &#8212; testspeednet https://github.com/vroncevic/testspeednet/releases documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/classic.css?v=514cf933" />
     
@@ -28,7 +28,7 @@
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../../testspeednet.html" >testspeednet</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../../net.html" accesskey="U">testspeednet.net</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">testspeednet.net.utils.printer_factory</a></li> 
+        <li class="nav-item nav-item-this"><a href="">testspeednet.net.utils.printer</a></li> 
       </ul>
     </div>  
 
@@ -37,17 +37,54 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <h1>Source code for testspeednet.net.utils.printer_factory</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;....&quot;&quot;&quot;</span>
+  <h1>Source code for testspeednet.net.utils.printer</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: UTF-8 -*-</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Module</span>
+<span class="sd">    printer.py</span>
+<span class="sd">Copyright</span>
+<span class="sd">    Copyright (C) 2016 - 2024 Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;</span>
+<span class="sd">    testspeednet is free software: you can redistribute it and/or modify</span>
+<span class="sd">    it under the terms of the GNU General Public License as published by the</span>
+<span class="sd">    Free Software Foundation, either version 3 of the License, or</span>
+<span class="sd">    (at your option) any later version.</span>
+<span class="sd">    testspeednet is distributed in the hope that it will be useful, but</span>
+<span class="sd">    WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="sd">    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</span>
+<span class="sd">    See the GNU General Public License for more details.</span>
+<span class="sd">    You should have received a copy of the GNU General Public License along</span>
+<span class="sd">    with this program. If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="sd">Info</span>
+<span class="sd">    Defines funstion printer.</span>
+<span class="sd">&#39;&#39;&#39;</span>
 
 <span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">List</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Vladimir Roncevic&#39;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s1">&#39;(C) 2024, https://vroncevic.github.io/testspeednet&#39;</span>
+<span class="n">__credits__</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Vladimir Roncevic&#39;</span><span class="p">,</span> <span class="s1">&#39;Python Software Foundation&#39;</span><span class="p">]</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s1">&#39;https://github.com/vroncevic/testspeednet/blob/dev/LICENSE&#39;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;1.0.0&#39;</span>
+<span class="n">__maintainer__</span> <span class="o">=</span> <span class="s1">&#39;Vladimir Roncevic&#39;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s1">&#39;elektron.ronca@gmail.com&#39;</span>
+<span class="n">__status__</span> <span class="o">=</span> <span class="s1">&#39;Updated&#39;</span>
 
 
-<div class="viewcode-block" id="print_">
-<a class="viewcode-back" href="../../../../testspeednet.net.utils.printer_factory.html#testspeednet.net.utils.printer_factory.print_">[docs]</a>
-<span class="k">def</span> <span class="nf">print_</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;...&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="print_private">
+<a class="viewcode-back" href="../../../../testspeednet.net.utils.printer.html#testspeednet.net.utils.printer.print_private">[docs]</a>
+<span class="k">def</span> <span class="nf">print_private</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Prints arguments to a specified file or to standard output.</span>
+
+<span class="sd">        :param args: Positional arguments to be printed</span>
+<span class="sd">        :type args: &lt;Any&gt;</span>
+<span class="sd">        :param kwargs: Keyword arguments, including &#39;file&#39; to specify</span>
+<span class="sd">                       the output file</span>
+<span class="sd">        :type kwargs: &lt;Any&gt;</span>
+<span class="sd">        :exceptions: None</span>
+<span class="sd">    &#39;&#39;&#39;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">bool</span><span class="p">(</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">return</span>
     <span class="n">fp</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;file&quot;</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
@@ -59,7 +96,7 @@
 
 
 <div class="viewcode-block" id="printer">
-<a class="viewcode-back" href="../../../../testspeednet.net.utils.printer_factory.html#testspeednet.net.utils.printer_factory.printer">[docs]</a>
+<a class="viewcode-back" href="../../../../testspeednet.net.utils.printer.html#testspeednet.net.utils.printer.printer">[docs]</a>
 <span class="k">def</span> <span class="nf">printer</span><span class="p">(</span>
     <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">quiet</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
@@ -67,7 +104,22 @@
     <span class="n">error</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;...&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Prints formatted text to standard output or standard error.</span>
+
+<span class="sd">        :param text: The text to be printed</span>
+<span class="sd">        :type text: &lt;str&gt;</span>
+<span class="sd">        :param quiet: If True, suppresses printing (default: False)</span>
+<span class="sd">        :type quiet: &lt;bool&gt;</span>
+<span class="sd">        :param debug: If True, prefixes text with &#39;DEBUG:&#39; (default: False)</span>
+<span class="sd">        :type debug: &lt;bool&gt;</span>
+<span class="sd">        :param error: If True, prints to standard error instead</span>
+<span class="sd">                      of standard output</span>
+<span class="sd">        :type error: &lt;bool&gt;</span>
+<span class="sd">        :param kwargs: Additional keyword arguments passed to print_private</span>
+<span class="sd">        :type kwargs: &lt;Any&gt;</span>
+<span class="sd">        :exceptions: None</span>
+<span class="sd">    &#39;&#39;&#39;</span>
     <span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">isatty</span><span class="p">():</span>
             <span class="n">out</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[1;30mDEBUG: </span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="se">\033</span><span class="s1">[0m&#39;</span>
@@ -78,7 +130,7 @@
     <span class="k">if</span> <span class="n">error</span><span class="p">:</span>
         <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;file&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">quiet</span><span class="p">:</span>
-        <span class="n">print_</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+        <span class="n">print_private</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 </pre></div>
 
@@ -115,7 +167,7 @@
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../../testspeednet.html" >testspeednet</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../../net.html" >testspeednet.net</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">testspeednet.net.utils.printer_factory</a></li> 
+        <li class="nav-item nav-item-this"><a href="">testspeednet.net.utils.printer</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

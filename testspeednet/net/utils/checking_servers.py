@@ -1,5 +1,25 @@
-"""..."""
+# -*- coding: UTF-8 -*-
 
+'''
+Module
+    checking_servers.py
+Copyright
+    Copyright (C) 2016 - 2024 Vladimir Roncevic <elektron.ronca@gmail.com>
+    testspeednet is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by the
+    Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+    testspeednet is distributed in the hope that it will be useful, but
+    WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+    See the GNU General Public License for more details.
+    You should have received a copy of the GNU General Public License along
+    with this program. If not, see <http://www.gnu.org/licenses/>.
+Info
+    Defines class NeighbourServer with attribute(s) and method(s).
+'''
+
+import sys
 import xml.parsers.expat
 import xml.etree.ElementTree as ET
 from typing import Any, List, Dict, Tuple, Generator, Callable, Optional
@@ -11,20 +31,40 @@ from time import time
 from http.client import BadStatusLine, HTTPResponse
 from urllib.request import HTTPError, OpenerDirector, Request
 from urllib.parse import ParseResult, urlparse
-from testspeednet.net.utils.distance import distance
-from testspeednet.net.utils.printer_factory import printer
-from testspeednet.net.utils.get_exception_factory import get_exception
-from testspeednet.net.utils.requester import Requester
-from testspeednet.net.utils.catch_request import CatchRequest
-from testspeednet.net.utils.get_response_stream_factory import get_response_stream
-from testspeednet.net.utils.user_agent import UserAgent
-from testspeednet.net.utils.gzip_decoded_response import GzipDecodedResponse
-from testspeednet.net.utils.test_http_connection import TestHTTPConnection
-from testspeednet.net.utils.test_https_connection import TestHTTPSConnection
-from testspeednet.net.utils.net_exceptions import (
-    ServersRetrievalError, NoMatchedServers, SpeedtestServersError,
-    SpeedtestBestServerFailure
-)
+
+try:
+    from testspeednet.net.utils.distance import distance
+    from testspeednet.net.utils.printer import printer
+    from testspeednet.net.utils.get_exception import get_exception
+    from testspeednet.net.utils.requester import Requester
+    from testspeednet.net.utils.catch_request import CatchRequest
+    from testspeednet.net.utils.get_response_stream import (
+        get_response_stream
+    )
+    from testspeednet.net.utils.user_agent import UserAgent
+    from testspeednet.net.utils.gzip_decoded_response import (
+        GzipDecodedResponse
+    )
+    from testspeednet.net.utils.test_http_connection import TestHTTPConnection
+    from testspeednet.net.utils.test_https_connection import (
+        TestHTTPSConnection
+    )
+    from testspeednet.net.utils.net_exceptions import (
+        ServersRetrievalError, NoMatchedServers, SpeedtestServersError,
+        SpeedtestBestServerFailure
+    )
+except ImportError as ats_error_message:
+    # Force close python ATS ##################################################
+    sys.exit(f'\n{__file__}\n{ats_error_message}\n')
+
+__author__ = 'Vladimir Roncevic'
+__copyright__ = '(C) 2024, https://vroncevic.github.io/testspeednet'
+__credits__: List[str] = ['Vladimir Roncevic', 'Python Software Foundation']
+__license__ = 'https://github.com/vroncevic/testspeednet/blob/dev/LICENSE'
+__version__ = '1.0.0'
+__maintainer__ = 'Vladimir Roncevic'
+__email__ = 'elektron.ronca@gmail.com'
+__status__ = 'Updated'
 
 etree_iter: Callable[..., Generator[ET.Element, None, None]] = ET.Element.iter
 CERT_ERROR: Tuple[Any] = (CertificateError,)
@@ -35,7 +75,22 @@ HTTP_ERRORS = (
 
 
 class NeighbourServer:
-    """...."""
+    '''
+        Defines class NeighbourServer with attribute(s) and method(s).
+
+        It defines:
+
+            :attributes:
+                | _TOOL_VERBOSE - Console text indicator for process-phase.
+            :methods:
+                | __init__ - Initializes an instance of NeighbourServer.
+                | get_servers - Retrieves a dictionary of servers
+                |               from speedtest.net.
+                | get_best_server - Finds and returns the best server
+                |                   based on latency.
+    '''
+
+    _TOOL_VERBOSE: str = 'TEST_SPEED_NET::NET::UTILS::NEIGHBOUR_SERVER'
 
     def __init__(
         self,
@@ -43,13 +98,29 @@ class NeighbourServer:
         secure: bool = False,
         opener: Optional[OpenerDirector] = None
     ) -> None:
-        """..."""
+        '''
+            Initializes an instance of NeighbourServer.
+
+            :param config: Configuration dictionary
+            :type config: <Dict[str, Any]>
+            :param secure: Flag indicating HTTPS usage
+            :type secure: <bool>
+            :param opener: A custom opener
+            :type opener: <Optional[OpenerDirector]>
+            :exceptions: None
+        '''
         self.config: Dict[str, Any] = config
         self.secure: bool = secure
         self.opener: Optional[OpenerDirector] = opener
 
-    def get_servers(self) -> Dict[Any, Any] | None:
-        """..."""
+    def get_servers(self) -> Optional[Dict[Any, Any]]:
+        '''
+            Retrieves a dictionary of servers from speedtest.net.
+
+            :return: Dictionary of servers
+            :rtype: <Optional[Dict[Any, Any]]>
+            :exceptions: ServersRetrievalError
+        '''
         urls: List[str] = [
             '://www.speedtest.net/speedtest-servers-static.php',
             'http://c.speedtest.net/speedtest-servers-static.php',
@@ -63,7 +134,7 @@ class NeighbourServer:
         for url in urls:
             try:
                 request: Request = Requester.build_request(
-                    url=f'{url}?threads={self.config['threads']['download']}',
+                    url=f'{url}?threads={self.config["threads"]["download"]}',
                     headers=headers,
                     secure=self.secure
                 )
@@ -131,8 +202,16 @@ class NeighbourServer:
         else:
             return servers
 
-    def get_best_server(self, limit: int = 5) -> Dict[str, Any] | None:
-        """..."""
+    def get_best_server(self, limit: int = 5) -> Optional[Dict[str, Any]]:
+        '''
+            Finds and returns the best server based on latency.
+
+            :param limit: Maximum number of servers to consider.
+            :type limit: <int>
+            :return: Best server dictionary
+            :rtype: <Optional[Dict[str, Any]]>
+            :exceptions: SpeedtestBestServerFailure
+        '''
         servers: Dict[Any, Any] | None = self.get_servers()
         closest: List[Dict[Any, Any]] = []
         if bool(servers):

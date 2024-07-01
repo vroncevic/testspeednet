@@ -29,7 +29,7 @@ from http.client import BadStatusLine, HTTPResponse
 
 try:
     from ats_utilities.console_io.success import success_message
-    from testspeednet.net.utils.get_exception_factory import get_exception
+    from testspeednet.net.utils.get_exception import get_exception
 except ImportError as ats_error_message:
     # Force close python ATS ##################################################
     sys.exit(f'\n{__file__}\n{ats_error_message}\n')

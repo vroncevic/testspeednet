@@ -69,10 +69,10 @@
 <span class="kn">from</span> <span class="nn">http.client</span> <span class="kn">import</span> <span class="n">HTTPResponse</span>
 
 <span class="k">try</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">testspeednet.net.utils.get_exception_factory</span> <span class="kn">import</span> <span class="n">get_exception</span>
+    <span class="kn">from</span> <span class="nn">testspeednet.net.utils.get_exception</span> <span class="kn">import</span> <span class="n">get_exception</span>
     <span class="kn">from</span> <span class="nn">testspeednet.net.utils.requester</span> <span class="kn">import</span> <span class="n">Requester</span>
     <span class="kn">from</span> <span class="nn">testspeednet.net.utils.catch_request</span> <span class="kn">import</span> <span class="n">CatchRequest</span>
-    <span class="kn">from</span> <span class="nn">testspeednet.net.utils.get_response_stream_factory</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="kn">from</span> <span class="nn">testspeednet.net.utils.get_response_stream</span> <span class="kn">import</span> <span class="p">(</span>
         <span class="n">get_response_stream</span>
     <span class="p">)</span>
     <span class="kn">from</span> <span class="nn">testspeednet.net.utils.gzip_decoded_response</span> <span class="kn">import</span> <span class="p">(</span>
@@ -241,7 +241,7 @@
             <span class="k">return</span> <span class="n">config</span>
         <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">SpeedtestConfigError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s1">&#39;Unknown loc: lat=</span><span class="si">{</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;lat&#39;</span><span class="p">)</span><span class="si">}</span><span class="s1"> lon=</span><span class="si">{</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;lon&#39;</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span>
+                <span class="sa">f</span><span class="s1">&#39;Unknown loc: lat=</span><span class="si">{</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;lat&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1"> lon=</span><span class="si">{</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;lon&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span>
             <span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span></div>
 </div>
 
