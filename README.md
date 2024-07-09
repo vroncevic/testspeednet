@@ -158,6 +158,44 @@ Tool structure
     6 directories, 39 files
 ```
 
+### Code coverage
+
+| Name | Stmts | Miss | Cover |
+|------|-------|------|-------|
+| `testspeednet/__init__.py` | 76 | 11 | 86% |
+| `testspeednet/net/__init__.py` | 74 | 6 | 92% |
+| `testspeednet/net/config.py` | 56 | 2 | 96% |
+| `testspeednet/net/download.py` | 30 | 2 | 93% |
+| `testspeednet/net/model.py` | 30 | 2 | 93% |
+| `testspeednet/net/speed.py` | 32 | 2 | 94% |
+| `testspeednet/net/test.py` | 155 | 6 | 96% |
+| `testspeednet/net/upload.py` | 30 | 2 | 93% |
+| `testspeednet/net/utils/__init__.py` | 0 | 0 | 100% |
+| `testspeednet/net/utils/catch_request.py` | 36 | 7 | 81% |
+| `testspeednet/net/utils/checking_servers.py` | 151 | 27 | 82% |
+| `testspeednet/net/utils/connector.py` | 22 | 1 | 95% |
+| `testspeednet/net/utils/distance.py` | 24 | 0 | 100% |
+| `testspeednet/net/utils/do_nothing.py` | 12 | 0 | 100% |
+| `testspeednet/net/utils/fake_shutdown_event.py` | 14 | 0 | 100% |
+| `testspeednet/net/utils/get_exception.py` | 12 | 1 | 92% |
+| `testspeednet/net/utils/get_response_stream.py` | 21 | 3 | 86% |
+| `testspeednet/net/utils/gzip_decoded_response.py` | 27 | 0 | 100% |
+| `testspeednet/net/utils/http_downloader.py` | 46 | 6 | 87% |
+| `testspeednet/net/utils/http_uploader.py` | 56 | 8 | 86% |
+| `testspeednet/net/utils/http_uploader_data.py` | 51 | 7 | 86% |
+| `testspeednet/net/utils/net_exceptions.py` | 16 | 0 | 100% |
+| `testspeednet/net/utils/opener.py` | 27 | 2 | 93% |
+| `testspeednet/net/utils/printer.py` | 28 | 9 | 68% |
+| `testspeednet/net/utils/requester.py` | 29 | 0 | 100% |
+| `testspeednet/net/utils/test_http_connection.py` | 18 | 0 | 100% |
+| `testspeednet/net/utils/test_http_handler.py` | 24 | 2 | 92% |
+| `testspeednet/net/utils/test_https_connection.py` | 27 | 1 | 96% |
+| `testspeednet/net/utils/test_https_handler.py` | 27 | 2 | 93% |
+| `testspeednet/net/utils/test_net_config.py` | 85 | 15 | 82% |
+| `testspeednet/net/utils/test_results.py` | 75 | 33 | 56% |
+| `testspeednet/net/utils/user_agent.py` | 17 | 0 | 100% |
+| **Total** | 1328 | 157 | 88% |
+
 ### Docs
 
 [![Documentation Status](https://readthedocs.org/projects/testspeednet/badge/?version=latest)](https://testspeednet.readthedocs.io/en/latest/?badge=latest)

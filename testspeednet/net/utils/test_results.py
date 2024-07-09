@@ -43,7 +43,7 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = '(C) 2024, https://vroncevic.github.io/testspeednet'
 __credits__: List[str] = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/testspeednet/blob/dev/LICENSE'
-__version__ = '1.0.1'
+__version__ = '1.0.2'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -112,7 +112,7 @@ class TestResults:
         self.ping: int = ping
         self.server: Dict[str, Any] = server or {}
         self.client: Dict[str, Any] = client or {}
-        self._share: str | None = None
+        self._share: Optional[str] = None
         now_date: str = datetime.now(UTC).isoformat()
         self.timestamp: str = f'{now_date}Z'
         self.bytes_received = 0

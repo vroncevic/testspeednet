@@ -21,14 +21,14 @@ Info
 '''
 
 import sys
-from typing import List, Dict
+from typing import List, Dict, Optional
 from os.path import dirname, realpath
 from argparse import Namespace
 
 try:
     from ats_utilities.splash import Splash
     from ats_utilities.logging import ATSLogger
-    from ats_utilities.cli.cfg_cli import CfgCLI
+    from ats_utilities.cli import ATSCli
     from ats_utilities.console_io.error import error_message
     from ats_utilities.console_io.verbose import verbose_message
     from ats_utilities.console_io.success import success_message
@@ -43,13 +43,13 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = '(C) 2024, https://vroncevic.github.io/testspeednet'
 __credits__: List[str] = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/testspeednet/blob/dev/LICENSE'
-__version__ = '1.0.1'
+__version__ = '1.0.2'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
 
 
-class TestSpeedNet(CfgCLI):
+class TestSpeedNet(ATSCli):
     '''
         Defines class TestSpeedNet with attribute(s) and method(s).
         Loads a base info, creates a CLI interface and run operation(s).
@@ -97,9 +97,9 @@ class TestSpeedNet(CfgCLI):
             verbose, [f'{self._TOOL_VERBOSE.lower()} init tool info']
         )
         self._logger: ATSLogger = ATSLogger(
-            self._TOOL_VERBOSE.lower(), f'{current_dir}{self._LOG}', verbose
+            self._TOOL_VERBOSE.lower(), True, None, True, verbose
         )
-        if self.tool_operational:
+        if self.is_operational():
             self.add_new_option(
                 self._OPS[0], self._OPS[1], type=str,
                 choices=['speed', 'download', 'upload', 'fetch'],
@@ -123,14 +123,14 @@ class TestSpeedNet(CfgCLI):
             :exceptions: None
         '''
         status: bool = False
-        if self.tool_operational:
+        if self.is_operational():
             try:
-                args: Namespace = self.parse_args(sys.argv)
+                args: Optional[Namespace] = self.parse_args(sys.argv)
                 tool: TestSpeedNetProcessor = TestSpeedNetProcessor(
                     getattr(args, 'verbose') or verbose
                 )
                 try:
-                    command: str | None = None
+                    command: Optional[str] = None
                     match args:
                         case Namespace(cmd='speed'):
                             command = getattr(args, 'cmd')
@@ -166,7 +166,7 @@ class TestSpeedNet(CfgCLI):
                     )
             except SystemExit:
                 error_message(
-                    [f'{self._TOOL_VERBOSE.lower()} expected argument -n']
+                    [f'{self._TOOL_VERBOSE.lower()} expected argument cmd']
                 )
                 return status
         else:
