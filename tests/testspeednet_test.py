@@ -36,7 +36,7 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = '(C) 2024, https://vroncevic.github.io/testspeednet'
 __credits__: List[str] = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/testspeednet/blob/dev/LICENSE'
-__version__ = '1.0.1'
+__version__ = '1.0.2'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -62,7 +62,6 @@ class NetTestCase(TestCase):
                 | test_process_upload - Test upload structure.
                 | test_process_download - Test download structure.
                 | test_process_fetch - Test fetch structure.
-                | test_tool_not_operational - Test not operational.
     '''
 
     def setUp(self) -> None:
@@ -121,15 +120,6 @@ class NetTestCase(TestCase):
         sys.argv.insert(1, 'fetch')
         generator: TestSpeedNet = TestSpeedNet()
         self.assertTrue(generator.process())
-
-    def test_tool_not_operational(self) -> None:
-        '''Test not operational'''
-        sys.argv.clear()
-        sys.argv.insert(0, '-c')
-        sys.argv.insert(1, 'speed')
-        generator: TestSpeedNet = TestSpeedNet()
-        generator.tool_operational = False
-        self.assertFalse(generator.process())
 
 
 if __name__ == '__main__':

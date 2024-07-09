@@ -21,7 +21,7 @@ Info
 '''
 
 import sys
-from typing import List
+from typing import List, Optional
 from os.path import dirname, realpath
 
 try:
@@ -44,7 +44,7 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = '(C) 2024, https://vroncevic.github.io/testspeednet'
 __credits__: List[str] = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/testspeednet/blob/dev/LICENSE'
-__version__ = '1.0.1'
+__version__ = '1.0.2'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -93,10 +93,10 @@ class TestSpeedNetProcessor(FileCheck, ProConfig):
         if self.is_file_ok():
             yml2obj = Yaml2Object(net_config)
             self.config = yml2obj.read_configuration()
-        self.speed: Speed | None = None
-        self.download: Download | None = None
-        self.upload: Upload | None = None
-        self.fetch: Fetch | None = None
+        self.speed: Optional[Speed] = None
+        self.download: Optional[Download] = None
+        self.upload: Optional[Upload] = None
+        self.fetch: Optional[Fetch] = None
 
     def execute(self, cmd: str, verbose: bool = False) -> bool:
         '''
@@ -110,8 +110,8 @@ class TestSpeedNetProcessor(FileCheck, ProConfig):
             :rtype: <bool>
             :exceptions: ATSTypeError | ATSValueError
         '''
-        error_msg: str | None = None
-        error_id: int | None = None
+        error_msg: Optional[str] = None
+        error_id: Optional[int] = None
         error_msg, error_id = self.check_params([('str:cmd', cmd)])
         if error_id == self.TYPE_ERROR:
             raise ATSTypeError(error_msg)
