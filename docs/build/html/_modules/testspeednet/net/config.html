@@ -44,7 +44,7 @@
 <span class="sd">Module</span>
 <span class="sd">    config.py</span>
 <span class="sd">Copyright</span>
-<span class="sd">    Copyright (C) 2016 - 2024 Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;</span>
+<span class="sd">    Copyright (C) 2016 - 2026 Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;</span>
 <span class="sd">    testspeednet is free software: you can redistribute it and/or modify</span>
 <span class="sd">    it under the terms of the GNU General Public License as published by the</span>
 <span class="sd">    Free Software Foundation, either version 3 of the License, or</span>
@@ -68,21 +68,23 @@
     <span class="kn">from</span> <span class="nn">requests</span> <span class="kn">import</span> <span class="n">get</span><span class="p">,</span> <span class="n">Response</span>
     <span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span><span class="p">,</span> <span class="n">Engine</span>
     <span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">sessionmaker</span>
+    <span class="kn">from</span> <span class="nn">sqlalchemy.exc</span> <span class="kn">import</span> <span class="n">SQLAlchemyError</span><span class="p">,</span> <span class="n">DBAPIError</span>
     <span class="kn">from</span> <span class="nn">ats_utilities.console_io.verbose</span> <span class="kn">import</span> <span class="n">verbose_message</span>
+    <span class="kn">from</span> <span class="nn">ats_utilities.console_io.error</span> <span class="kn">import</span> <span class="n">error_message</span>
     <span class="kn">from</span> <span class="nn">ats_utilities.console_io.success</span> <span class="kn">import</span> <span class="n">success_message</span>
     <span class="kn">from</span> <span class="nn">testspeednet.net.model</span> <span class="kn">import</span> <span class="n">SpeedTestServer</span><span class="p">,</span> <span class="n">Base</span>
-<span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">ats_error_message</span><span class="p">:</span>
-    <span class="c1"># Force close python ATS ##################################################</span>
-    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="si">{</span><span class="vm">__file__</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">ats_error_message</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">ats_error_message</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+    <span class="c1"># Force exit python #######################################################</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="si">{</span><span class="vm">__file__</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">ats_error_message</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>  <span class="c1"># pragma: no cover</span>
 
-<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Vladimir Roncevic&#39;</span>
-<span class="n">__copyright__</span> <span class="o">=</span> <span class="s1">&#39;(C) 2024, https://vroncevic.github.io/testspeednet&#39;</span>
+<span class="n">__author__</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;Vladimir Roncevic&#39;</span>
+<span class="n">__copyright__</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;(C) 2026, https://vroncevic.github.io/testspeednet&#39;</span>
 <span class="n">__credits__</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Vladimir Roncevic&#39;</span><span class="p">,</span> <span class="s1">&#39;Python Software Foundation&#39;</span><span class="p">]</span>
-<span class="n">__license__</span> <span class="o">=</span> <span class="s1">&#39;https://github.com/vroncevic/testspeednet/blob/dev/LICENSE&#39;</span>
-<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;1.0.2&#39;</span>
-<span class="n">__maintainer__</span> <span class="o">=</span> <span class="s1">&#39;Vladimir Roncevic&#39;</span>
-<span class="n">__email__</span> <span class="o">=</span> <span class="s1">&#39;elektron.ronca@gmail.com&#39;</span>
-<span class="n">__status__</span> <span class="o">=</span> <span class="s1">&#39;Updated&#39;</span>
+<span class="n">__license__</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;https://github.com/vroncevic/testspeednet/blob/dev/LICENSE&#39;</span>
+<span class="n">__version__</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;1.0.3&#39;</span>
+<span class="n">__maintainer__</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;Vladimir Roncevic&#39;</span>
+<span class="n">__email__</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;elektron.ronca@gmail.com&#39;</span>
+<span class="n">__status__</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;Updated&#39;</span>
 
 
 <div class="viewcode-block" id="Fetch">
@@ -198,36 +200,45 @@
                 <span class="s1">&#39;please wait...&#39;</span>
             <span class="p">]</span>
         <span class="p">)</span>
-        <span class="n">engine</span><span class="p">:</span> <span class="n">Engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;sqlite:///testspeednet_servers.db&#39;</span><span class="p">)</span>
-        <span class="n">Base</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">drop_all</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
-        <span class="n">Base</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">create_all</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
-        <span class="n">Session</span> <span class="o">=</span> <span class="n">sessionmaker</span><span class="p">(</span><span class="n">bind</span><span class="o">=</span><span class="n">engine</span><span class="p">)</span>
-        <span class="n">session</span> <span class="o">=</span> <span class="n">Session</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">server_info</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">available_servers</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-            <span class="n">server</span> <span class="o">=</span> <span class="n">SpeedTestServer</span><span class="p">(</span>
-                <span class="nb">id</span><span class="o">=</span><span class="n">index</span><span class="p">,</span>
-                <span class="n">server_id</span><span class="o">=</span><span class="n">server_info</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span>
-                <span class="n">url</span><span class="o">=</span><span class="n">server_info</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">],</span>
-                <span class="n">lat</span><span class="o">=</span><span class="n">server_info</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">],</span>
-                <span class="n">lon</span><span class="o">=</span><span class="n">server_info</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">],</span>
-                <span class="n">distance</span><span class="o">=</span><span class="n">server_info</span><span class="p">[</span><span class="s1">&#39;distance&#39;</span><span class="p">],</span>
-                <span class="n">name</span><span class="o">=</span><span class="n">server_info</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span>
-                <span class="n">country</span><span class="o">=</span><span class="n">server_info</span><span class="p">[</span><span class="s1">&#39;country&#39;</span><span class="p">],</span>
-                <span class="n">cc</span><span class="o">=</span><span class="n">server_info</span><span class="p">[</span><span class="s1">&#39;cc&#39;</span><span class="p">],</span>
-                <span class="n">sponsor</span><span class="o">=</span><span class="n">server_info</span><span class="p">[</span><span class="s1">&#39;sponsor&#39;</span><span class="p">],</span>
-                <span class="n">preferred</span><span class="o">=</span><span class="n">server_info</span><span class="p">[</span><span class="s1">&#39;preferred&#39;</span><span class="p">],</span>
-                <span class="n">host</span><span class="o">=</span><span class="n">server_info</span><span class="p">[</span><span class="s1">&#39;host&#39;</span><span class="p">],</span>
-            <span class="p">)</span>
-            <span class="n">verbose_message</span><span class="p">(</span>
-                <span class="n">verbose</span><span class="p">,</span>
+        <span class="n">db_engine</span><span class="p">:</span> <span class="n">Engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;sqlite:///testspeednet_servers.db&#39;</span><span class="p">)</span>
+        <span class="n">Base</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">drop_all</span><span class="p">(</span><span class="n">db_engine</span><span class="p">)</span>
+        <span class="n">Base</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">create_all</span><span class="p">(</span><span class="n">db_engine</span><span class="p">)</span>
+        <span class="n">session_instance</span> <span class="o">=</span> <span class="n">sessionmaker</span><span class="p">(</span><span class="n">bind</span><span class="o">=</span><span class="n">db_engine</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">session_instance</span><span class="p">()</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">info</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">available_servers</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+                    <span class="n">server</span> <span class="o">=</span> <span class="n">SpeedTestServer</span><span class="p">(</span>
+                        <span class="nb">id</span><span class="o">=</span><span class="n">index</span><span class="p">,</span>
+                        <span class="n">server_id</span><span class="o">=</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span>
+                        <span class="n">url</span><span class="o">=</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">],</span>
+                        <span class="n">lat</span><span class="o">=</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">],</span>
+                        <span class="n">lon</span><span class="o">=</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">],</span>
+                        <span class="n">distance</span><span class="o">=</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;distance&#39;</span><span class="p">],</span>
+                        <span class="n">name</span><span class="o">=</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span>
+                        <span class="n">country</span><span class="o">=</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;country&#39;</span><span class="p">],</span>
+                        <span class="n">cc</span><span class="o">=</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;cc&#39;</span><span class="p">],</span>
+                        <span class="n">sponsor</span><span class="o">=</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;sponsor&#39;</span><span class="p">],</span>
+                        <span class="n">preferred</span><span class="o">=</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;preferred&#39;</span><span class="p">],</span>
+                        <span class="n">host</span><span class="o">=</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;host&#39;</span><span class="p">],</span>
+                    <span class="p">)</span>
+                    <span class="n">verbose_message</span><span class="p">(</span>
+                        <span class="n">verbose</span><span class="p">,</span>
+                        <span class="p">[</span>
+                            <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_TOOL_VERBOSE</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="si">}</span><span class="s1"> performs store&#39;</span><span class="p">,</span>
+                            <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">server</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span>
+                        <span class="p">]</span>
+                    <span class="p">)</span>
+                    <span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">server</span><span class="p">)</span>
+                    <span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">except</span> <span class="p">(</span><span class="n">SQLAlchemyError</span><span class="p">,</span> <span class="n">DBAPIError</span><span class="p">)</span> <span class="k">as</span> <span class="n">store_error_db</span><span class="p">:</span>
+            <span class="n">error_message</span><span class="p">(</span>
                 <span class="p">[</span>
-                    <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_TOOL_VERBOSE</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="si">}</span><span class="s1"> performs store config&#39;</span><span class="p">,</span>
-                    <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">server</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span>
+                    <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_TOOL_VERBOSE</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+                    <span class="sa">f</span><span class="s1">&#39;store server list database error: </span><span class="si">{</span><span class="n">store_error_db</span><span class="si">}</span><span class="s1">&#39;</span>
                 <span class="p">]</span>
             <span class="p">)</span>
-            <span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">server</span><span class="p">)</span>
-            <span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
-        <span class="k">return</span> <span class="kc">True</span></div>
+            <span class="k">return</span> <span class="kc">False</span></div>
 </div>
 
 </pre></div>
@@ -269,7 +280,7 @@
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-    &#169; Copyright 2024, Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;.
+    &#169; Copyright 2026, Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     </div>
   </body>
