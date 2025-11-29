@@ -51,7 +51,7 @@
 <dl class="simple">
 <dt>Module</dt><dd><p>model.py</p>
 </dd>
-<dt>Copyright</dt><dd><p>Copyright (C) 2016 - 2024 Vladimir Roncevic &lt;<a class="reference external" href="mailto:elektron&#46;ronca&#37;&#52;&#48;gmail&#46;com">elektron<span>&#46;</span>ronca<span>&#64;</span>gmail<span>&#46;</span>com</a>&gt;
+<dt>Copyright</dt><dd><p>Copyright (C) 2016 - 2026 Vladimir Roncevic &lt;<a class="reference external" href="mailto:elektron&#46;ronca&#37;&#52;&#48;gmail&#46;com">elektron<span>&#46;</span>ronca<span>&#64;</span>gmail<span>&#46;</span>com</a>&gt;
 testspeednet is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by the
 Free Software Foundation, either version 3 of the License, or
@@ -68,9 +68,55 @@ Defines SQLAlchemy model for available servers.</p>
 </dd>
 </dl>
 <dl class="py class">
+<dt class="sig sig-object py" id="testspeednet.net.model.Base">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testspeednet.net.model.</span></span><span class="sig-name descname"><span class="pre">Base</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/testspeednet/net/model.html#Base"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testspeednet.net.model.Base" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.sqlalchemy.org/en/20/orm/mapping_api.html#sqlalchemy.orm.DeclarativeBase" title="(in SQLAlchemy v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeclarativeBase</span></code></a></p>
+<p>Defines class Base with attribute(s) and method(s).
+Defines SQLAlchemy declarative base class.</p>
+<p>It defines:</p>
+<blockquote>
+<div><dl class="field-list">
+<dt class="field-odd">attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><div class="line-block">
+<div class="line">None</div>
+</div>
+</dd>
+<dt class="field-even">methods<span class="colon">:</span></dt>
+<dd class="field-even"><div class="line-block">
+<div class="line">None</div>
+</div>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="testspeednet.net.model.Base._sa_registry">
+<span class="sig-name descname"><span class="pre">_sa_registry</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">_RegistryType</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;sqlalchemy.orm.decl_api.registry</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#testspeednet.net.model.Base._sa_registry" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="testspeednet.net.model.Base.metadata">
+<span class="sig-name descname"><span class="pre">metadata</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">MetaData</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">MetaData()</span></em><a class="headerlink" href="#testspeednet.net.model.Base.metadata" title="Link to this definition">¶</a></dt>
+<dd><p>Refers to the <code class="xref py py-class docutils literal notranslate"><span class="pre">_schema.MetaData</span></code> collection that will be used
+for new <code class="xref py py-class docutils literal notranslate"><span class="pre">_schema.Table</span></code> objects.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference external" href="https://docs.sqlalchemy.org/en/20/orm/declarative_tables.html#orm-declarative-metadata" title="(in SQLAlchemy v2.0)"><span>Accessing Table and Metadata</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="testspeednet.net.model.Base.registry">
+<span class="sig-name descname"><span class="pre">registry</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">_RegistryType</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;sqlalchemy.orm.decl_api.registry</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#testspeednet.net.model.Base.registry" title="Link to this definition">¶</a></dt>
+<dd><p>Refers to the <code class="xref py py-class docutils literal notranslate"><span class="pre">_orm.registry</span></code> in use where new
+<code class="xref py py-class docutils literal notranslate"><span class="pre">_orm.Mapper</span></code> objects will be associated.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="testspeednet.net.model.SpeedTestServer">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testspeednet.net.model.</span></span><span class="sig-name descname"><span class="pre">SpeedTestServer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/testspeednet/net/model.html#SpeedTestServer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testspeednet.net.model.SpeedTestServer" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Base</span></code></p>
+<dd><p>Bases: <a class="reference internal" href="#testspeednet.net.model.Base" title="testspeednet.net.model.Base"><code class="xref py py-class docutils literal notranslate"><span class="pre">Base</span></code></a></p>
 <p>Defines class SpeedTestServer with attribute(s) and method(s).
 Defines SQLAlchemy model for available servers.</p>
 <p>It defines:</p>
@@ -107,62 +153,62 @@ Defines SQLAlchemy model for available servers.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="testspeednet.net.model.SpeedTestServer.cc">
-<span class="sig-name descname"><span class="pre">cc</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Column</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#testspeednet.net.model.SpeedTestServer.cc" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">cc</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.sqlalchemy.org/en/20/orm/internals.html#sqlalchemy.orm.Mapped" title="(in SQLAlchemy v2.0)"><span class="pre">Mapped</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#testspeednet.net.model.SpeedTestServer.cc" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="testspeednet.net.model.SpeedTestServer.country">
-<span class="sig-name descname"><span class="pre">country</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Column</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#testspeednet.net.model.SpeedTestServer.country" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">country</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.sqlalchemy.org/en/20/orm/internals.html#sqlalchemy.orm.Mapped" title="(in SQLAlchemy v2.0)"><span class="pre">Mapped</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#testspeednet.net.model.SpeedTestServer.country" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="testspeednet.net.model.SpeedTestServer.distance">
-<span class="sig-name descname"><span class="pre">distance</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Column</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#testspeednet.net.model.SpeedTestServer.distance" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">distance</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.sqlalchemy.org/en/20/orm/internals.html#sqlalchemy.orm.Mapped" title="(in SQLAlchemy v2.0)"><span class="pre">Mapped</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#testspeednet.net.model.SpeedTestServer.distance" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="testspeednet.net.model.SpeedTestServer.host">
-<span class="sig-name descname"><span class="pre">host</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Column</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#testspeednet.net.model.SpeedTestServer.host" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">host</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.sqlalchemy.org/en/20/orm/internals.html#sqlalchemy.orm.Mapped" title="(in SQLAlchemy v2.0)"><span class="pre">Mapped</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#testspeednet.net.model.SpeedTestServer.host" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="testspeednet.net.model.SpeedTestServer.id">
-<span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Column</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#testspeednet.net.model.SpeedTestServer.id" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.sqlalchemy.org/en/20/orm/internals.html#sqlalchemy.orm.Mapped" title="(in SQLAlchemy v2.0)"><span class="pre">Mapped</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#testspeednet.net.model.SpeedTestServer.id" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="testspeednet.net.model.SpeedTestServer.lat">
-<span class="sig-name descname"><span class="pre">lat</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Column</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#testspeednet.net.model.SpeedTestServer.lat" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">lat</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.sqlalchemy.org/en/20/orm/internals.html#sqlalchemy.orm.Mapped" title="(in SQLAlchemy v2.0)"><span class="pre">Mapped</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#testspeednet.net.model.SpeedTestServer.lat" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="testspeednet.net.model.SpeedTestServer.lon">
-<span class="sig-name descname"><span class="pre">lon</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Column</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#testspeednet.net.model.SpeedTestServer.lon" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">lon</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.sqlalchemy.org/en/20/orm/internals.html#sqlalchemy.orm.Mapped" title="(in SQLAlchemy v2.0)"><span class="pre">Mapped</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#testspeednet.net.model.SpeedTestServer.lon" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="testspeednet.net.model.SpeedTestServer.name">
-<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Column</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#testspeednet.net.model.SpeedTestServer.name" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.sqlalchemy.org/en/20/orm/internals.html#sqlalchemy.orm.Mapped" title="(in SQLAlchemy v2.0)"><span class="pre">Mapped</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#testspeednet.net.model.SpeedTestServer.name" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="testspeednet.net.model.SpeedTestServer.preferred">
-<span class="sig-name descname"><span class="pre">preferred</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Column</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#testspeednet.net.model.SpeedTestServer.preferred" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">preferred</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.sqlalchemy.org/en/20/orm/internals.html#sqlalchemy.orm.Mapped" title="(in SQLAlchemy v2.0)"><span class="pre">Mapped</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#testspeednet.net.model.SpeedTestServer.preferred" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="testspeednet.net.model.SpeedTestServer.server_id">
-<span class="sig-name descname"><span class="pre">server_id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Column</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#testspeednet.net.model.SpeedTestServer.server_id" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">server_id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.sqlalchemy.org/en/20/orm/internals.html#sqlalchemy.orm.Mapped" title="(in SQLAlchemy v2.0)"><span class="pre">Mapped</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#testspeednet.net.model.SpeedTestServer.server_id" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="testspeednet.net.model.SpeedTestServer.sponsor">
-<span class="sig-name descname"><span class="pre">sponsor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Column</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#testspeednet.net.model.SpeedTestServer.sponsor" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">sponsor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.sqlalchemy.org/en/20/orm/internals.html#sqlalchemy.orm.Mapped" title="(in SQLAlchemy v2.0)"><span class="pre">Mapped</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#testspeednet.net.model.SpeedTestServer.sponsor" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="testspeednet.net.model.SpeedTestServer.url">
-<span class="sig-name descname"><span class="pre">url</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Column</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#testspeednet.net.model.SpeedTestServer.url" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">url</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.sqlalchemy.org/en/20/orm/internals.html#sqlalchemy.orm.Mapped" title="(in SQLAlchemy v2.0)"><span class="pre">Mapped</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#testspeednet.net.model.SpeedTestServer.url" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -180,6 +226,12 @@ Defines SQLAlchemy model for available servers.</p>
     <h3><a href="index.html">Table of Contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">testspeednet.net.model module</a><ul>
+<li><a class="reference internal" href="#testspeednet.net.model.Base"><code class="docutils literal notranslate"><span class="pre">Base</span></code></a><ul>
+<li><a class="reference internal" href="#testspeednet.net.model.Base._sa_registry"><code class="docutils literal notranslate"><span class="pre">Base._sa_registry</span></code></a></li>
+<li><a class="reference internal" href="#testspeednet.net.model.Base.metadata"><code class="docutils literal notranslate"><span class="pre">Base.metadata</span></code></a></li>
+<li><a class="reference internal" href="#testspeednet.net.model.Base.registry"><code class="docutils literal notranslate"><span class="pre">Base.registry</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#testspeednet.net.model.SpeedTestServer"><code class="docutils literal notranslate"><span class="pre">SpeedTestServer</span></code></a><ul>
 <li><a class="reference internal" href="#testspeednet.net.model.SpeedTestServer._sa_class_manager"><code class="docutils literal notranslate"><span class="pre">SpeedTestServer._sa_class_manager</span></code></a></li>
 <li><a class="reference internal" href="#testspeednet.net.model.SpeedTestServer.cc"><code class="docutils literal notranslate"><span class="pre">SpeedTestServer.cc</span></code></a></li>
@@ -255,7 +307,7 @@ Defines SQLAlchemy model for available servers.</p>
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-    &#169; Copyright 2024, Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;.
+    &#169; Copyright 2026, Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     </div>
   </body>

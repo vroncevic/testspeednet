@@ -1,6 +1,6 @@
 # Test speed net (download/upload)
 
-<img align="right" src="https://github.com/vroncevic/testspeednet/blob/master/docs/speedtest_logo.png" width="25%">
+<img align="right" src="https://raw.githubusercontent.com/vroncevic/testspeednet/refs/heads/master/docs/speedtest_logo.png" width="25%">
 
 **testspeednet** is tool for test speed net (download/upload).
 
@@ -23,6 +23,7 @@ other information that should be provided before the modules are installed.
     - [Install using docker](#install-using-docker)
 - [Dependencies](#dependencies)
 - [Tool structure](#tool-structure)
+- [Code coverage](#code-coverage)
 - [Docs](#docs)
 - [Contributing](#contributing)
 - [Copyright and licence](#copyright-and-licence)
@@ -162,39 +163,39 @@ Tool structure
 
 | Name | Stmts | Miss | Cover |
 |------|-------|------|-------|
-| `testspeednet/__init__.py` | 76 | 11 | 86% |
-| `testspeednet/net/__init__.py` | 74 | 6 | 92% |
-| `testspeednet/net/config.py` | 56 | 2 | 96% |
-| `testspeednet/net/download.py` | 30 | 2 | 93% |
-| `testspeednet/net/model.py` | 30 | 2 | 93% |
-| `testspeednet/net/speed.py` | 32 | 2 | 94% |
-| `testspeednet/net/test.py` | 155 | 6 | 96% |
-| `testspeednet/net/upload.py` | 30 | 2 | 93% |
-| `testspeednet/net/utils/__init__.py` | 0 | 0 | 100% |
-| `testspeednet/net/utils/catch_request.py` | 36 | 7 | 81% |
-| `testspeednet/net/utils/checking_servers.py` | 151 | 27 | 82% |
-| `testspeednet/net/utils/connector.py` | 22 | 1 | 95% |
-| `testspeednet/net/utils/distance.py` | 24 | 0 | 100% |
-| `testspeednet/net/utils/do_nothing.py` | 12 | 0 | 100% |
-| `testspeednet/net/utils/fake_shutdown_event.py` | 14 | 0 | 100% |
-| `testspeednet/net/utils/get_exception.py` | 12 | 1 | 92% |
-| `testspeednet/net/utils/get_response_stream.py` | 21 | 3 | 86% |
-| `testspeednet/net/utils/gzip_decoded_response.py` | 27 | 0 | 100% |
-| `testspeednet/net/utils/http_downloader.py` | 46 | 6 | 87% |
-| `testspeednet/net/utils/http_uploader.py` | 56 | 8 | 86% |
-| `testspeednet/net/utils/http_uploader_data.py` | 51 | 7 | 86% |
-| `testspeednet/net/utils/net_exceptions.py` | 16 | 0 | 100% |
-| `testspeednet/net/utils/opener.py` | 27 | 2 | 93% |
-| `testspeednet/net/utils/printer.py` | 28 | 9 | 68% |
-| `testspeednet/net/utils/requester.py` | 29 | 0 | 100% |
-| `testspeednet/net/utils/test_http_connection.py` | 18 | 0 | 100% |
-| `testspeednet/net/utils/test_http_handler.py` | 24 | 2 | 92% |
-| `testspeednet/net/utils/test_https_connection.py` | 27 | 1 | 96% |
-| `testspeednet/net/utils/test_https_handler.py` | 27 | 2 | 93% |
-| `testspeednet/net/utils/test_net_config.py` | 85 | 15 | 82% |
-| `testspeednet/net/utils/test_results.py` | 75 | 33 | 56% |
-| `testspeednet/net/utils/user_agent.py` | 17 | 0 | 100% |
-| **Total** | 1328 | 157 | 88% |
+| `testspeednet/__init__.py` | 74 | 9 | 88%|
+| `testspeednet/net/__init__.py` | 72 | 4 | 94%|
+| `testspeednet/net/config.py` | 60 | 3 | 95%|
+| `testspeednet/net/download.py` | 28 | 0 | 100%|
+| `testspeednet/net/model.py` | 30 | 0 | 100%|
+| `testspeednet/net/speed.py` | 30 | 0 | 100%|
+| `testspeednet/net/test.py` | 153 | 3 | 98%|
+| `testspeednet/net/upload.py` | 28 | 0 | 100%|
+| `testspeednet/net/utils/__init__.py` | 0 | 0 | 100%|
+| `testspeednet/net/utils/catch_request.py` | 34 | 5 | 85%|
+| `testspeednet/net/utils/checking_servers.py` | 149 | 25 | 83%|
+| `testspeednet/net/utils/connector.py` | 22 | 1 | 95%|
+| `testspeednet/net/utils/distance.py` | 24 | 0 | 100%|
+| `testspeednet/net/utils/do_nothing.py` | 12 | 0 | 100%|
+| `testspeednet/net/utils/fake_shutdown_event.py` | 14 | 0 | 100%|
+| `testspeednet/net/utils/get_exception.py` | 12 | 1 | 92%|
+| `testspeednet/net/utils/get_response_stream.py` | 19 | 1 | 95%|
+| `testspeednet/net/utils/gzip_decoded_response.py` | 27 | 0 | 100%|
+| `testspeednet/net/utils/http_downloader.py` | 44 | 4 | 91%|
+| `testspeednet/net/utils/http_uploader.py` | 54 | 10 | 81%|
+| `testspeednet/net/utils/http_uploader_data.py` | 51 | 8 | 84%|
+| `testspeednet/net/utils/net_exceptions.py` | 16 | 0 | 100%|
+| `testspeednet/net/utils/opener.py` | 25 | 0 | 100%|
+| `testspeednet/net/utils/printer.py` | 28 | 9 | 68%|
+| `testspeednet/net/utils/requester.py` | 29 | 0 | 100%|
+| `testspeednet/net/utils/test_http_connection.py` | 18 | 0 | 100%|
+| `testspeednet/net/utils/test_http_handler.py` | 22 | 0 | 100%|
+| `testspeednet/net/utils/test_https_connection.py` | 27 | 1 | 96%|
+| `testspeednet/net/utils/test_https_handler.py` | 25 | 0 | 100%|
+| `testspeednet/net/utils/test_net_config.py` | 83 | 13 | 84%|
+| `testspeednet/net/utils/test_results.py` | 73 | 31 | 58%|
+| `testspeednet/net/utils/user_agent.py` | 17 | 0 | 100%|
+| **Total** | 1300 | 128 | 90% |
 
 ### Docs
 
@@ -213,7 +214,7 @@ More documentation and info at
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-Copyright (C) 2016 - 2024 by [vroncevic.github.io/testspeednet](https://vroncevic.github.io/testspeednet)
+Copyright (C) 2016 - 2026 by [vroncevic.github.io/testspeednet](https://vroncevic.github.io/testspeednet)
 
 **testspeednet** is free software; you can redistribute it and/or modify
 it under the same terms as Python itself, either Python version 3.x or,

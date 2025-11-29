@@ -4,7 +4,7 @@
 Module
     conf.py
 Copyright
-    Copyright (C) 2016 - 2024 Vladimir Roncevic <elektron.ronca@gmail.com>
+    Copyright (C) 2016 - 2026 Vladimir Roncevic <elektron.ronca@gmail.com>
     testspeednet is free software: you can redistribute it and/or modify it
     under the terms of the GNU General Public License as published by the
     Free Software Foundation, either version 3 of the License, or
@@ -27,11 +27,20 @@ from typing import Any, List, Dict, Tuple
 sys.path.insert(0, os.path.abspath('../../'))
 
 project: str = 'testspeednet'
-project_copyright: str = '2024, Vladimir Roncevic <elektron.ronca@gmail.com>'
+project_copyright: str = '2026, Vladimir Roncevic <elektron.ronca@gmail.com>'
 author: str = 'Vladimir Roncevic <elektron.ronca@gmail.com>'
-version: str = '1.0.2'
+version: str = '1.0.3'
 release: str = 'https://github.com/vroncevic/testspeednet/releases'
-extensions: List[str] = ['sphinx.ext.autodoc', 'sphinx.ext.viewcode']
+extensions: List[str] = [
+    'sphinx.ext.autodoc',
+    'sphinx.ext.viewcode',
+    'sphinx.ext.intersphinx'
+]
+intersphinx_mapping: Dict[str, Tuple[str, Any]] = {
+    'sqlalchemy': ('https://docs.sqlalchemy.org/en/20/', None),
+    'python': ('https://docs.python.org/3/', None),
+}
+intersphinx_default_role: str = 'py:obj'
 templates_path: List[str] = ['_templates']
 source_suffix: str = '.rst'
 master_doc: str = 'index'

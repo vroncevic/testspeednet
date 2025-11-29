@@ -4,7 +4,7 @@
 Module
     model.py
 Copyright
-    Copyright (C) 2016 - 2024 Vladimir Roncevic <elektron.ronca@gmail.com>
+    Copyright (C) 2016 - 2026 Vladimir Roncevic <elektron.ronca@gmail.com>
     testspeednet is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by the
     Free Software Foundation, either version 3 of the License, or
@@ -21,26 +21,37 @@ Info
 '''
 
 import sys
-from typing import Any, List
+from typing import List
 
 try:
-    from sqlalchemy import Column, String, Integer, Float, Boolean
-    from sqlalchemy.ext.declarative import declarative_base
-except ImportError as ats_error_message:
-    # Force close python ATS ##################################################
-    sys.exit(f'\n{__file__}\n{ats_error_message}\n')
+    from sqlalchemy import String, Float, Boolean, Integer
+    from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+except ImportError as ats_error_message:  # pragma: no cover
+    # Force exit python #######################################################
+    sys.exit(f'\n{__file__}\n{ats_error_message}\n')  # pragma: no cover
 
-__author__ = 'Vladimir Roncevic'
-__copyright__ = '(C) 2024, https://vroncevic.github.io/testspeednet'
+__author__: str = 'Vladimir Roncevic'
+__copyright__: str = '(C) 2026, https://vroncevic.github.io/testspeednet'
 __credits__: List[str] = ['Vladimir Roncevic', 'Python Software Foundation']
-__license__ = 'https://github.com/vroncevic/testspeednet/blob/dev/LICENSE'
-__version__ = '1.0.2'
-__maintainer__ = 'Vladimir Roncevic'
-__email__ = 'elektron.ronca@gmail.com'
-__status__ = 'Updated'
+__license__: str = 'https://github.com/vroncevic/testspeednet/blob/dev/LICENSE'
+__version__: str = '1.0.3'
+__maintainer__: str = 'Vladimir Roncevic'
+__email__: str = 'elektron.ronca@gmail.com'
+__status__: str = 'Updated'
 
-# Declarative base from SQLAlchemy.
-Base: Any = declarative_base()
+
+class Base(DeclarativeBase):
+    '''
+        Defines class Base with attribute(s) and method(s).
+        Defines SQLAlchemy declarative base class.
+
+        It defines:
+
+            :attributes:
+                | None
+            :methods:
+                | None
+    '''
 
 
 class SpeedTestServer(Base):
@@ -70,15 +81,29 @@ class SpeedTestServer(Base):
 
     __tablename__: str = 'speedtest_servers'
 
-    id: Column[int] = Column(Integer, primary_key=True)
-    server_id: Column[str] = Column(String, nullable=False)
-    url: Column[str] = Column(String, nullable=False)
-    lat: Column[float] = Column(Float, nullable=False)
-    lon: Column[float] = Column(Float, nullable=False)
-    distance: Column[float] = Column(Float, nullable=False)
-    name: Column[str] = Column(String, nullable=False)
-    country: Column[str] = Column(String, nullable=False)
-    cc: Column[str] = Column(String, nullable=False)
-    sponsor: Column[str] = Column(String, nullable=False)
-    preferred: Column[bool] = Column(Boolean, nullable=False)
-    host: Column[str] = Column(String, nullable=False)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    server_id: Mapped[str] = mapped_column(String(255), nullable=False)
+    url: Mapped[str] = mapped_column(String(512), nullable=False)
+    lat: Mapped[float] = mapped_column(Float, nullable=False)
+    lon: Mapped[float] = mapped_column(Float, nullable=False)
+    distance: Mapped[float] = mapped_column(Float, nullable=False)
+    name: Mapped[str] = mapped_column(String(255), nullable=False)
+    country: Mapped[str] = mapped_column(String(255), nullable=False)
+    cc: Mapped[str] = mapped_column(String(2), nullable=False)
+    sponsor: Mapped[str] = mapped_column(String(255), nullable=False)
+    preferred: Mapped[bool] = mapped_column(Boolean, nullable=False)
+    host: Mapped[str] = mapped_column(String(255), nullable=False)
+
+    def __repr__(self) -> str:
+        '''
+            String representation of SpeedTestServer instance.
+
+            :return: String representation of the SpeedTestServer instance.
+            :rtype: <str>
+            :exceptions: None
+        '''
+        return (
+            f"SpeedTestServer(id={self.id!r}, "
+            f"server_id={self.server_id!r}, "
+            f"name={self.name!r})"
+        )

@@ -4,7 +4,7 @@
 Module
     config.py
 Copyright
-    Copyright (C) 2016 - 2024 Vladimir Roncevic <elektron.ronca@gmail.com>
+    Copyright (C) 2016 - 2026 Vladimir Roncevic <elektron.ronca@gmail.com>
     testspeednet is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by the
     Free Software Foundation, either version 3 of the License, or
@@ -28,21 +28,23 @@ try:
     from requests import get, Response
     from sqlalchemy import create_engine, Engine
     from sqlalchemy.orm import sessionmaker
+    from sqlalchemy.exc import SQLAlchemyError, DBAPIError
     from ats_utilities.console_io.verbose import verbose_message
+    from ats_utilities.console_io.error import error_message
     from ats_utilities.console_io.success import success_message
     from testspeednet.net.model import SpeedTestServer, Base
-except ImportError as ats_error_message:
-    # Force close python ATS ##################################################
-    sys.exit(f'\n{__file__}\n{ats_error_message}\n')
+except ImportError as ats_error_message:  # pragma: no cover
+    # Force exit python #######################################################
+    sys.exit(f'\n{__file__}\n{ats_error_message}\n')  # pragma: no cover
 
-__author__ = 'Vladimir Roncevic'
-__copyright__ = '(C) 2024, https://vroncevic.github.io/testspeednet'
+__author__: str = 'Vladimir Roncevic'
+__copyright__: str = '(C) 2026, https://vroncevic.github.io/testspeednet'
 __credits__: List[str] = ['Vladimir Roncevic', 'Python Software Foundation']
-__license__ = 'https://github.com/vroncevic/testspeednet/blob/dev/LICENSE'
-__version__ = '1.0.2'
-__maintainer__ = 'Vladimir Roncevic'
-__email__ = 'elektron.ronca@gmail.com'
-__status__ = 'Updated'
+__license__: str = 'https://github.com/vroncevic/testspeednet/blob/dev/LICENSE'
+__version__: str = '1.0.3'
+__maintainer__: str = 'Vladimir Roncevic'
+__email__: str = 'elektron.ronca@gmail.com'
+__status__: str = 'Updated'
 
 
 class Fetch:
@@ -148,33 +150,42 @@ class Fetch:
                 'please wait...'
             ]
         )
-        engine: Engine = create_engine('sqlite:///testspeednet_servers.db')
-        Base.metadata.drop_all(engine)
-        Base.metadata.create_all(engine)
-        Session = sessionmaker(bind=engine)
-        session = Session()
-        for index, server_info in enumerate(available_servers, start=1):
-            server = SpeedTestServer(
-                id=index,
-                server_id=server_info['id'],
-                url=server_info['url'],
-                lat=server_info['lat'],
-                lon=server_info['lon'],
-                distance=server_info['distance'],
-                name=server_info['name'],
-                country=server_info['country'],
-                cc=server_info['cc'],
-                sponsor=server_info['sponsor'],
-                preferred=server_info['preferred'],
-                host=server_info['host'],
-            )
-            verbose_message(
-                verbose,
+        db_engine: Engine = create_engine('sqlite:///testspeednet_servers.db')
+        Base.metadata.drop_all(db_engine)
+        Base.metadata.create_all(db_engine)
+        session_instance = sessionmaker(bind=db_engine)
+        try:
+            with session_instance() as session:
+                for index, info in enumerate(available_servers, start=1):
+                    server = SpeedTestServer(
+                        id=index,
+                        server_id=info['id'],
+                        url=info['url'],
+                        lat=info['lat'],
+                        lon=info['lon'],
+                        distance=info['distance'],
+                        name=info['name'],
+                        country=info['country'],
+                        cc=info['cc'],
+                        sponsor=info['sponsor'],
+                        preferred=info['preferred'],
+                        host=info['host'],
+                    )
+                    verbose_message(
+                        verbose,
+                        [
+                            f'{self._TOOL_VERBOSE.lower()} performs store',
+                            f'{str(server)}'
+                        ]
+                    )
+                    session.add(server)
+                    session.commit()
+            return True
+        except (SQLAlchemyError, DBAPIError) as store_error_db:
+            error_message(
                 [
-                    f'{self._TOOL_VERBOSE.lower()} performs store config',
-                    f'{str(server)}'
+                    f'{self._TOOL_VERBOSE.lower()}',
+                    f'store server list database error: {store_error_db}'
                 ]
             )
-            session.add(server)
-            session.commit()
-        return True
+            return False
