@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>testspeednet.core.service.ijson_exporter module &#8212; testspeednet https://github.com/vroncevic/testspeednet/releases documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css?v=514cf933" />
+    
+    <script src="_static/documentation_options.js?v=8a831383"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="testspeednet.core.service.inetwork_speed_tester module" href="testspeednet.core.service.inetwork_speed_tester.html" />
+    <link rel="prev" title="testspeednet.core.service.engine module" href="testspeednet.core.service.engine.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="testspeednet.core.service.inetwork_speed_tester.html" title="testspeednet.core.service.inetwork_speed_tester module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="testspeednet.core.service.engine.html" title="testspeednet.core.service.engine module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">testspeednet https://github.com/vroncevic/testspeednet/releases documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >testspeednet</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="testspeednet.html" >testspeednet package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="testspeednet.core.html" >testspeednet.core package</a> &#187;</li>
+          <li class="nav-item nav-item-4"><a href="testspeednet.core.service.html" accesskey="U">testspeednet.core.service package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">testspeednet.core.service.ijson_exporter module</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-testspeednet.core.service.ijson_exporter">
+<span id="testspeednet-core-service-ijson-exporter-module"></span><h1>testspeednet.core.service.ijson_exporter module<a class="headerlink" href="#module-testspeednet.core.service.ijson_exporter" title="Link to this heading">¶</a></h1>
+<dl class="simple">
+<dt>Module</dt><dd><p>ijson_exporter.py</p>
+</dd>
+<dt>Copyright</dt><dd><p>Copyright (C) 2016 - 2026 Vladimir Roncevic &lt;<a class="reference external" href="mailto:elektron&#46;ronca&#37;&#52;&#48;gmail&#46;com">elektron<span>&#46;</span>ronca<span>&#64;</span>gmail<span>&#46;</span>com</a>&gt;
+testspeednet is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by the
+Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+testspeednet is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+See the GNU General Public License for more details.
+You should have received a copy of the GNU General Public License along
+with this program. If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+</dd>
+<dt>Info</dt><dd><p>Defines abstract interface for JSON data export and loading.</p>
+</dd>
+</dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="testspeednet.core.service.ijson_exporter.IJsonExporter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">testspeednet.core.service.ijson_exporter.</span></span><span class="sig-name descname"><span class="pre">IJsonExporter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/testspeednet/core/service/ijson_exporter.html#IJsonExporter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testspeednet.core.service.ijson_exporter.IJsonExporter" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Protocol" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Protocol</span></code></a></p>
+<p>Defines abstract interface for JSON data export and loading.</p>
+<p>It defines:</p>
+<blockquote>
+<div><dl class="field-list">
+<dt class="field-odd">methods<span class="colon">:</span></dt>
+<dd class="field-odd"><div class="line-block">
+<div class="line">export_json - Exports data object or collection to JSON file.</div>
+<div class="line">load_json - Loads configuration dictionary from JSON file.</div>
+<div class="line">is_initialized - Checks if the exporter is initialized.</div>
+</div>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="testspeednet.core.service.ijson_exporter.IJsonExporter._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#testspeednet.core.service.ijson_exporter.IJsonExporter._abc_impl" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="testspeednet.core.service.ijson_exporter.IJsonExporter._is_protocol">
+<span class="sig-name descname"><span class="pre">_is_protocol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#testspeednet.core.service.ijson_exporter.IJsonExporter._is_protocol" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="testspeednet.core.service.ijson_exporter.IJsonExporter._is_runtime_protocol">
+<span class="sig-name descname"><span class="pre">_is_runtime_protocol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#testspeednet.core.service.ijson_exporter.IJsonExporter._is_runtime_protocol" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="testspeednet.core.service.ijson_exporter.IJsonExporter.export_json">
+<span class="sig-name descname"><span class="pre">export_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><span class="pre">object</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span></span><a class="reference internal" href="_modules/testspeednet/core/service/ijson_exporter.html#IJsonExporter.export_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testspeednet.core.service.ijson_exporter.IJsonExporter.export_json" title="Link to this definition">¶</a></dt>
+<dd><p>Exports data object or collection to JSON file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> – Data object or collection to export.</p></li>
+<li><p><strong>file_path</strong> – Path to target JSON file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if export succeeded, False otherwise.</p>
+</dd>
+<dt class="field-odd">Exceptions<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="testspeednet.core.service.ijson_exporter.IJsonExporter.is_initialized">
+<span class="sig-name descname"><span class="pre">is_initialized</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span></span><a class="reference internal" href="_modules/testspeednet/core/service/ijson_exporter.html#IJsonExporter.is_initialized"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testspeednet.core.service.ijson_exporter.IJsonExporter.is_initialized" title="Link to this definition">¶</a></dt>
+<dd><p>Checks if the exporter is initialized.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if initialized, False otherwise.</p>
+</dd>
+<dt class="field-even">Exceptions<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="testspeednet.core.service.ijson_exporter.IJsonExporter.load_json">
+<span class="sig-name descname"><span class="pre">load_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><span class="pre">object</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/testspeednet/core/service/ijson_exporter.html#IJsonExporter.load_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#testspeednet.core.service.ijson_exporter.IJsonExporter.load_json" title="Link to this definition">¶</a></dt>
+<dd><p>Loads configuration dictionary from JSON file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file_path</strong> – Path to JSON file to load.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Loaded configuration dictionary.</p>
+</dd>
+<dt class="field-odd">Exceptions<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">testspeednet.core.service.ijson_exporter module</a><ul>
+<li><a class="reference internal" href="#testspeednet.core.service.ijson_exporter.IJsonExporter"><code class="docutils literal notranslate"><span class="pre">IJsonExporter</span></code></a><ul>
+<li><a class="reference internal" href="#testspeednet.core.service.ijson_exporter.IJsonExporter._abc_impl"><code class="docutils literal notranslate"><span class="pre">IJsonExporter._abc_impl</span></code></a></li>
+<li><a class="reference internal" href="#testspeednet.core.service.ijson_exporter.IJsonExporter._is_protocol"><code class="docutils literal notranslate"><span class="pre">IJsonExporter._is_protocol</span></code></a></li>
+<li><a class="reference internal" href="#testspeednet.core.service.ijson_exporter.IJsonExporter._is_runtime_protocol"><code class="docutils literal notranslate"><span class="pre">IJsonExporter._is_runtime_protocol</span></code></a></li>
+<li><a class="reference internal" href="#testspeednet.core.service.ijson_exporter.IJsonExporter.export_json"><code class="docutils literal notranslate"><span class="pre">IJsonExporter.export_json()</span></code></a></li>
+<li><a class="reference internal" href="#testspeednet.core.service.ijson_exporter.IJsonExporter.is_initialized"><code class="docutils literal notranslate"><span class="pre">IJsonExporter.is_initialized()</span></code></a></li>
+<li><a class="reference internal" href="#testspeednet.core.service.ijson_exporter.IJsonExporter.load_json"><code class="docutils literal notranslate"><span class="pre">IJsonExporter.load_json()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="testspeednet.core.service.engine.html"
+                          title="previous chapter">testspeednet.core.service.engine module</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="testspeednet.core.service.inetwork_speed_tester.html"
+                          title="next chapter">testspeednet.core.service.inetwork_speed_tester module</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/testspeednet.core.service.ijson_exporter.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="testspeednet.core.service.inetwork_speed_tester.html" title="testspeednet.core.service.inetwork_speed_tester module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="testspeednet.core.service.engine.html" title="testspeednet.core.service.engine module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">testspeednet https://github.com/vroncevic/testspeednet/releases documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >testspeednet</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="testspeednet.html" >testspeednet package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="testspeednet.core.html" >testspeednet.core package</a> &#187;</li>
+          <li class="nav-item nav-item-4"><a href="testspeednet.core.service.html" >testspeednet.core.service package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">testspeednet.core.service.ijson_exporter module</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2026, Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    </div>
+  </body>
+</html>
