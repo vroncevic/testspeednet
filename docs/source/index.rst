@@ -9,13 +9,22 @@ The README is used to introduce the tool and provide instructions on
 how to install the tool, any machine dependencies it may have and any
 other information that should be provided before the tool is installed.
 
-|testspeednet python checker| |testspeednet python package| |github issues| |documentation status| |github contributors|
+|testspeednet python checker| |testspeednet python package| |testspeednet interface checker| |testspeednet isp checker| |testspeednet srp checker| |github issues| |documentation status| |github contributors|
 
 .. |testspeednet python checker| image:: https://github.com/vroncevic/testspeednet/actions/workflows/testspeednet_python_checker.yml/badge.svg
    :target: https://github.com/vroncevic/testspeednet/actions/workflows/testspeednet_python_checker.yml
 
 .. |testspeednet python package| image:: https://github.com/vroncevic/testspeednet/actions/workflows/testspeednet_package_checker.yml/badge.svg
    :target: https://github.com/vroncevic/testspeednet/actions/workflows/testspeednet_package.yml
+
+.. |testspeednet interface checker| image:: https://github.com/vroncevic/testspeednet/actions/workflows/testspeednet_interface_checker.yml/badge.svg
+   :target: https://github.com/vroncevic/testspeednet/actions/workflows/testspeednet_interface_checker.yml
+
+.. |testspeednet isp checker| image:: https://github.com/vroncevic/testspeednet/actions/workflows/testspeednet_isp_checker.yml/badge.svg
+   :target: https://github.com/vroncevic/testspeednet/actions/workflows/testspeednet_isp_checker.yml
+
+.. |testspeednet srp checker| image:: https://github.com/vroncevic/testspeednet/actions/workflows/testspeednet_srp_checker.yml/badge.svg
+   :target: https://github.com/vroncevic/testspeednet/actions/workflows/testspeednet_srp_checker.yml
 
 .. |github issues| image:: https://img.shields.io/github/issues/vroncevic/testspeednet.svg
    :target: https://github.com/vroncevic/testspeednet/issues
@@ -33,8 +42,8 @@ other information that should be provided before the tool is installed.
    self
    modules
 
-Installation
--------------
+🚀 Installation
+-----------------
 
 |testspeednet python3 build|
 
@@ -71,15 +80,15 @@ You can use Docker to create image/container, or You can use pip to install
     # pyton3
     pip3 install testspeednet
 
-Dependencies
--------------
+📦 Dependencies
+---------------
 
 **testspeednet** requires next modules and libraries
 
 * `ats-utilities - Python App/Tool/Script Utilities <https://pypi.org/project/ats-utilities/>`_
 
-Tool structure
----------------
+📁 Tool structure
+-----------------
 
 **testspeednet** is based on OOP.
 
@@ -88,63 +97,148 @@ Tool structure
 .. code-block:: bash
 
     testspeednet/
-          ├── conf/
-          │   ├── apis.yaml
-          │   ├── testspeednet.cfg
-          │   ├── testspeednet.logo
-          │   └── testspeednet_util.cfg
-          ├── __init__.py
-          ├── log/
-          │   └── testspeednet.log
-          ├── net/
-          │   ├── config.py
-          │   ├── download.py
-          │   ├── __init__.py
-          │   ├── model.py
-          │   ├── speed.py
-          │   ├── test.py
-          │   ├── upload.py
-          │   └── utils/
-          │       ├── catch_request.py
-          │       ├── checking_servers.py
-          │       ├── connector.py
-          │       ├── distance.py
-          │       ├── do_nothing_factory.py
-          │       ├── fake_shutdown_event.py
-          │       ├── get_exception_factory.py
-          │       ├── get_response_stream_factory.py
-          │       ├── gzip_decoded_response.py
-          │       ├── http_downloader.py
-          │       ├── http_uploader_data.py
-          │       ├── http_uploader.py
-          │       ├── __init__.py
-          │       ├── net_exceptions.py
-          │       ├── opener.py
-          │       ├── printer_factory.py
-          │       ├── requester.py
-          │       ├── test_http_connection.py
-          │       ├── test_http_handler.py
-          │       ├── test_https_connection.py
-          │       ├── test_https_handler.py
-          │       ├── test_net_config.py
-          │       ├── test_results.py
-          │       └── user_agent.py
-          ├── py.typed
-          └── run/
-              └── testspeednet_run.py
-    
-    6 directories, 39 files
+         ├── core/
+         │   ├── __init__.py
+         │   ├── model/
+         │   │   ├── __init__.py
+         │   │   ├── speed_test_result.py
+         │   │   ├── speed_test_server.py
+         │   │   └── speed_test_stat.py
+         │   └── service/
+         │       ├── engine.py
+         │       ├── ijson_exporter.py
+         │       ├── inetwork_speed_tester.py
+         │       ├── __init__.py
+         │       ├── iserver_repository.py
+         │       ├── iservice.py
+         │       └── isubprocessor.py
+         ├── engine.py
+         ├── infrastructure/
+         │   ├── cli/
+         │   │   ├── engine.py
+         │   │   ├── icli.py
+         │   │   ├── __init__.py
+         │   │   └── setup/
+         │   │       ├── bundle.py
+         │   │       ├── dep_validator.py
+         │   │       ├── dependencies.py
+         │   │       ├── factory.py
+         │   │       ├── __init__.py
+         │   │       ├── keys.py
+         │   │       ├── opt_validator.py
+         │   │       ├── options.py
+         │   │       ├── registry.py
+         │   │       └── validator.py
+         │   ├── command/
+         │   │   ├── command.py
+         │   │   ├── download_command_definition.py
+         │   │   ├── download_command_executor.py
+         │   │   ├── fetch_command_definition.py
+         │   │   ├── fetch_command_executor.py
+         │   │   ├── history_command_definition.py
+         │   │   ├── history_command_executor.py
+         │   │   ├── icommand_definition.py
+         │   │   ├── icommand_executor.py
+         │   │   ├── __init__.py
+         │   │   ├── speed_command_definition.py
+         │   │   ├── speed_command_executor.py
+         │   │   ├── upload_command_definition.py
+         │   │   └── upload_command_executor.py
+         │   ├── config/
+         │   │   ├── apis.yaml
+         │   │   ├── testspeednet.cfg
+         │   │   ├── testspeednet.logo
+         │   │   └── testspeednet_util.cfg
+         │   ├── database/
+         │   │   ├── __init__.py
+         │   │   └── server_repository.py
+         │   ├── __init__.py
+         │   ├── json_exporter.py
+         │   ├── network_speed_tester.py
+         │   └── subprocessor.py
+         ├── __init__.py
+         ├── py.typed
+         └── setup/
+             ├── bundle.py
+             ├── dep_validator.py
+             ├── dependencies.py
+             ├── factory.py
+             ├── __init__.py
+             ├── keys.py
+             ├── opt_validator.py
+             ├── options.py
+             ├── registry.py
+             └── validator.py
 
-Copyright and licence
------------------------
+     11 directories, 62 files
 
-|license: gpl v3| |license: apache 2.0|
+✨ Features
+-----------
 
-.. |license: gpl v3| image:: https://img.shields.io/badge/license-gplv3-blue.svg
-   :target: https://www.gnu.org/licenses/gpl-3.0
+* Comprehensive network speed testing for download, upload, ping, and overall bandwidth.
+* Provides a modular and extensible architecture based on OOP and SOLID principles.
+* Multi-command CLI interface supporting speed, download, upload, fetch, and history.
+* Automatic persistence of measurement results and available test servers in local SQLite database.
+* Optional JSON export capability for programmatic processing and reporting (--json).
+* History inspection with configurable record limit (--limit).
+* High code quality with full type checking and quality gates compliance.
 
-.. |license: apache 2.0| image:: https://img.shields.io/badge/license-apache%202.0-blue.svg
-   :target: https://opensource.org/licenses/apache-2.0
+📊 Code coverage
+----------------
+
+.. csv-table:: Code coverage
+   :file: coverage_table.csv
+   :widths: 60, 10, 10, 20
+   :header-rows: 1
+
+🛠 Usage
+--------
+
+Install package
+
+.. code-block:: bash
+
+    pip3 install testspeednet
+
+Prepare main entry point by downloading `main.py` or create your own.
+
+.. code-block:: bash
+
+    wget -O main.py https://raw.githubusercontent.com/vroncevic/testspeednet/main/main.py
+
+Running tool for checking network speed
+
+.. code-block:: bash
+
+    python3 main.py speed
+
+Running tool for fetching servers
+
+.. code-block:: bash
+
+    python3 main.py fetch
+
+Running tool for viewing history
+
+.. code-block:: bash
+
+    python3 main.py history --limit 10
+
+📚 Docs
+-------
+
+More documentation and info at
+
+* `testspeednet.readthedocs.io <https://testspeednet.readthedocs.io>`_
+* `www.python.org <https://www.python.org/>`_
+
+👥 Contributing
+---------------
+
+`Contributing to testspeednet <https://github.com/vroncevic/testspeednet/blob/dev/CONTRIBUTING.md>`_
+
+📄 Copyright and licence
+-------------------------
 
 Copyright (C) 2016 - 2026 by `vroncevic.github.io/testspeednet <https://vroncevic.github.io/testspeednet>`_
 
@@ -153,20 +247,3 @@ it under the same terms as Python itself, either Python version 3.x or,
 at your option, any later version of Python 3 you may have available.
 
 Lets help and support PSF.
-
-|python software foundation|
-
-.. |python software foundation| image:: https://raw.githubusercontent.com/vroncevic/testspeednet/dev/docs/psf-logo-alpha.png
-   :target: https://www.python.org/psf/
-
-|donate|
-
-.. |donate| image:: https://www.paypalobjects.com/en_us/i/btn/btn_donatecc_lg.gif
-   :target: https://www.python.org/psf/donations/
-
-Indices and tables
-------------------
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
